@@ -26,3 +26,4 @@ flutter:
   assets:
     - assets/lang/en.json
     - assets/lang/bn.json
+    - assets/icons/
