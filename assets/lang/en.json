@@ -1,4 +1,4 @@
 {
-  "hello": "Hello!",
-  "welcome": "Welcome to our app"
+  "add_medication": "Add Medication",
+  "medication_reminder_text": "Never miss a dose. Tell us about your medications and/or supplements to receive reminders."
 }
