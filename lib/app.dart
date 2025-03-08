@@ -14,7 +14,6 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'MY RX',
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.dark,
       theme: appTheme,
       locale: locale,
       fallbackLocale: LocalizationService.defaultLocale,

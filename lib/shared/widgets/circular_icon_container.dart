@@ -11,8 +11,8 @@ class CircularIconContainer extends StatelessWidget {
   const CircularIconContainer({
     super.key,
     required this.iconPath,
-    this.size = 120,
-    this.padding = 30,
+    this.size = 100,
+    this.padding = 25,
     this.backgroundColor = AppColors.containerColor,
     this.iconColor = AppColors.primaryTextColor,
   });
