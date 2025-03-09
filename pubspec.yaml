@@ -14,6 +14,7 @@ dependencies:
   get: ^4.7.2
   shared_preferences: ^2.5.2
   hugeicons: ^0.0.7
+  cached_network_image: ^3.4.1
 
 
 dev_dependencies:
@@ -28,3 +29,4 @@ flutter:
     - assets/lang/en.json
     - assets/lang/bn.json
     - assets/icons/
+    - assets/images/
