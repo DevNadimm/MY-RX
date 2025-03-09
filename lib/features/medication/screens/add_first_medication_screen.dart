@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/get_utils.dart';
-import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/features/medication/screens/add_medication_screen.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
 import 'package:new_app/shared/widgets/circular_icon_container.dart';
@@ -37,9 +36,7 @@ class _AddFirstMedicationScreenState extends State<AddFirstMedicationScreen> {
               const SizedBox(height: 16),
               Text(
                 'medication_reminder_text'.tr,
-                style: const TextStyle(
-                  color: AppColors.primaryTextColor,
-                ),
+                style: Theme.of(context).textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
