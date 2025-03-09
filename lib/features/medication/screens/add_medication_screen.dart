@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:new_app/core/utils/constant_list.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
+import 'package:new_app/shared/widgets/app_bar_leading_arrow.dart';
 import 'package:new_app/shared/widgets/custom_bottom_sheet.dart';
 
 class AddMedicationScreen extends StatefulWidget {
@@ -24,6 +25,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
           preferredSize: Size.fromHeight(1.5),
           child: AppBarBottomDivider(),
         ),
+        leading: const AppBarLeadingArrow(),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
