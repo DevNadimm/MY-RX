@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_core/src/get_main.dart';
+import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:new_app/core/themes/colors.dart';
+import 'package:new_app/features/medication/screens/add_medication_screen.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
 import 'package:new_app/shared/widgets/circular_icon_container.dart';
 
-class AddMedicationsScreen extends StatefulWidget {
-  const AddMedicationsScreen({super.key});
+class AddFirstMedicationScreen extends StatefulWidget {
+  const AddFirstMedicationScreen({super.key});
 
   @override
-  State<AddMedicationsScreen> createState() => _AddMedicationsScreenState();
+  State<AddFirstMedicationScreen> createState() => _AddFirstMedicationScreenState();
 }
 
-class _AddMedicationsScreenState extends State<AddMedicationsScreen> {
+class _AddFirstMedicationScreenState extends State<AddFirstMedicationScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +47,9 @@ class _AddMedicationsScreenState extends State<AddMedicationsScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.to(() => const AddMedicationScreen());
+                  },
                   child: Text('add_medication'.tr),
                 ),
               ),
