@@ -58,9 +58,9 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 readOnly: true,
                 onTap: () {
                   showCustomBottomSheet(
-                      items: ConstantList.drugList,
-                      controller: drugType,
-                      title: 'select_drug'.tr,
+                    items: ConstantList.drugList,
+                    controller: drugType,
+                    title: 'select_drug'.tr,
                   );
                 },
               ),
