@@ -85,7 +85,6 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                       items: drugList,
                       controller: drugType,
                       title: 'Select Drug',
-                      isSearchable: true
                   );
                 },
               ),
@@ -100,7 +99,6 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     required List<String> items,
     required TextEditingController controller,
     required String title,
-    bool isSearchable = false,
   }) async {
     return showModalBottomSheet(
       context: context,
@@ -120,7 +118,6 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 });
                 Navigator.pop(context);
               },
-              isSearchable: isSearchable,
             );
           },
         );

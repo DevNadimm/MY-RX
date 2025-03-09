@@ -8,7 +8,6 @@ class CustomBottomSheetContent extends StatelessWidget {
   final TextEditingController controller;
   final String title;
   final Function(String) onItemSelected;
-  final bool isSearchable;
 
   const CustomBottomSheetContent({
     super.key,
@@ -16,7 +15,6 @@ class CustomBottomSheetContent extends StatelessWidget {
     required this.controller,
     required this.title,
     required this.onItemSelected,
-    this.isSearchable = false,
   });
 
   @override
@@ -60,73 +58,58 @@ class CustomBottomSheetContent extends StatelessWidget {
           else
             Flexible(
               child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    if (isSearchable) Column(
-                      children: [
-                        TextFormField(
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(CupertinoIcons.search),
-                            hintText: "Search..."
+                child: ListView.separated(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemCount: items.length,
+                  separatorBuilder: (_, __) => const SizedBox(height: 12),
+                  itemBuilder: (context, index) {
+                    final item = items[index];
+                    final isSelected = controller.text == item;
+
+                    return InkWell(
+                      borderRadius: BorderRadius.circular(12),
+                      onTap: () {
+                        onItemSelected(item);
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(12),
+                          color: isSelected
+                              ? Colors.blue.withOpacity(0.1)
+                              : Colors.transparent,
+                          border: Border.all(
+                            color: isSelected
+                                ? AppColors.primaryColor
+                                : AppColors.inputBorderDefault,
+                            width: isSelected ? 1.5 : 1,
                           ),
                         ),
-                        const SizedBox(height: 12)
-                      ],
-                    ),
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: items.length,
-                      separatorBuilder: (_, __) => const SizedBox(height: 12),
-                      itemBuilder: (context, index) {
-                        final item = items[index];
-                        final isSelected = controller.text == item;
-
-                        return InkWell(
-                          borderRadius: BorderRadius.circular(12),
-                          onTap: () {
-                            onItemSelected(item);
-                          },
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 12, horizontal: 16),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(12),
-                              color: isSelected
-                                  ? Colors.blue.withOpacity(0.1)
-                                  : Colors.transparent,
-                              border: Border.all(
-                                color: isSelected
-                                    ? AppColors.primaryColor
-                                    : AppColors.inputBorderDefault,
-                                width: isSelected ? 1.5 : 1,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              child: Text(
+                                item,
+                                style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: isSelected
+                                      ? AppColors.primaryColor
+                                      : Colors.black87,
+                                ),
+                                maxLines: 1,
+                                overflow: TextOverflow.ellipsis,
                               ),
                             ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    item,
-                                    style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500,
-                                      color: isSelected
-                                          ? AppColors.primaryColor
-                                          : Colors.black87,
-                                    ),
-                                    maxLines: 1,
-                                    overflow: TextOverflow.ellipsis,
-                                  ),
-                                ),
-                                if (isSelected)
-                                  const Icon(Icons.check_circle, color: AppColors.primaryColor),
-                              ],
-                            ),
-                          ),
-                        );
-                      },
-                    ),
-                  ],
+                            if (isSelected)
+                              const Icon(Icons.check_circle, color: AppColors.primaryColor),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
             ),
