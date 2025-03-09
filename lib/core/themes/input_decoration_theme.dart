@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/themes/colors.dart';
 
-InputDecorationTheme lightInputDecorationTheme = InputDecorationTheme(
+InputDecorationTheme inputDecorationTheme = InputDecorationTheme(
   errorMaxLines: 3,
   prefixIconColor: AppColors.secondaryTextColor,
   suffixIconColor: AppColors.secondaryTextColor,
