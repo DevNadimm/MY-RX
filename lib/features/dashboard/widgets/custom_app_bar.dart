@@ -35,10 +35,8 @@ class CustomAppBar extends StatelessWidget {
             child: CachedNetworkImage(
               imageUrl: avatar,
               fit: BoxFit.cover,
-              placeholder: (context, url) =>
-                  Image.asset("assets/images/avatar.jpg"),
-              errorWidget: (context, url, error) =>
-                  Image.asset("assets/images/avatar.jpg"),
+              placeholder: (context, url) => Image.asset("assets/images/avatar.jpg"),
+              errorWidget: (context, url, error) => Image.asset("assets/images/avatar.jpg"),
             ),
           ),
         ),
