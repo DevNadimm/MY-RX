@@ -7,6 +7,8 @@
   "type_here": "Type here...",
   "select": "Select",
   "hello": "Hello,",
+  "features": "Features",
+  "recent_blog": "Recent Blog",
 
   "feature_patient_label": "Patient",
   "feature_patient_description": "Manage patient records efficiently.",

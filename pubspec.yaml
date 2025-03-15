@@ -30,3 +30,4 @@ flutter:
     - assets/lang/bn.json
     - assets/icons/
     - assets/images/
+    - assets/images/temp/

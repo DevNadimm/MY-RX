@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_utils/src/extensions/internacionalization.dart';
 import 'package:new_app/core/utils/constant_list.dart';
 import 'package:new_app/features/dashboard/widgets/custom_app_bar.dart';
 import 'package:new_app/features/dashboard/widgets/feature_container.dart';
+import 'package:new_app/features/dashboard/widgets/image_fade_carousel.dart';
 import 'package:new_app/shared/models/feature_model.dart';
 
 class HomeDashboardScreen extends StatefulWidget {
@@ -27,10 +29,15 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            const Padding(
+              padding: EdgeInsets.all(16),
+              child: ImageFadeCarousel(),
+            ),
+            const SizedBox(height: 16),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16.0),
               child: Text(
-                "Features",
+                'features'.tr,
                 style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
@@ -44,11 +51,20 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                 separatorBuilder: (context, index) => const SizedBox(width: 16),
                 itemBuilder: (context, index) {
                   FeatureModel feature = ConstantList.featureList[index];
-                  return FeatureContainer(feature: feature,);
+                  return FeatureContainer(
+                    feature: feature,
+                  );
                 },
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 32),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Text(
+                'recent_blog'.tr,
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+            ),
           ],
         ),
       ),
