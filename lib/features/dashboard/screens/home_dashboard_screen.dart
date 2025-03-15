@@ -7,6 +7,7 @@ import 'package:new_app/features/dashboard/widgets/custom_app_bar.dart';
 import 'package:new_app/features/dashboard/widgets/feature_container.dart';
 import 'package:new_app/features/dashboard/widgets/image_fade_carousel.dart';
 import 'package:new_app/shared/models/feature_model.dart';
+import 'package:new_app/shared/widgets/section_header.dart';
 
 class HomeDashboardScreen extends StatefulWidget {
   const HomeDashboardScreen({super.key});
@@ -68,26 +69,11 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               const SizedBox(height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'recent_blog'.tr,
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    InkWell(
-                      onTap: () {
-                        print("One tap");
-                      },
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 4),
-                        child: Text(
-                          'see_more'.tr,
-                          style: Theme.of(context).textTheme.bodyMedium,
-                        ),
-                      ),
-                    ),
-                  ],
+                child: SectionHeader(
+                  title: 'recent_blog'.tr,
+                  onSeeMoreTap: (){
+                    /// Navigate to blog section
+                  },
                 ),
               ),
               const SizedBox(height: 2),
