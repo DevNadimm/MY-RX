@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/internacionalization.dart';
+import 'package:new_app/core/temp/blog_list.dart';
 import 'package:new_app/core/utils/constant_list.dart';
 import 'package:new_app/features/dashboard/widgets/blog_container.dart';
 import 'package:new_app/features/dashboard/widgets/custom_app_bar.dart';
@@ -67,18 +68,36 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               const SizedBox(height: 32),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Text(
-                  'recent_blog'.tr,
-                  style: Theme.of(context).textTheme.titleMedium,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'recent_blog'.tr,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        print("One tap");
+                      },
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 4),
+                        child: Text(
+                          'see_more'.tr,
+                          style: Theme.of(context).textTheme.bodyMedium,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const SizedBox(height: 10),
+              const SizedBox(height: 2),
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 itemCount: 5,
                 itemBuilder: (context, index) {
-                  return const BlogContainer();
+                  final BlogContent bolg = blogList[index];
+                  return BlogContainer(blog: bolg);
                 },
               ),
             ],
