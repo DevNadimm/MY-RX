@@ -9,6 +9,7 @@
   "hello": "Hello,",
   "features": "Features",
   "recent_blog": "Recent Blog",
+  "see_more": "See More",
 
   "feature_patient_label": "Patient",
   "feature_patient_description": "Manage patient records efficiently.",
