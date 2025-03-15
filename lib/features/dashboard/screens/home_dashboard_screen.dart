@@ -80,7 +80,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: 5,
+                itemCount: 4,
                 itemBuilder: (context, index) {
                   final BlogContent bolg = blogList[index];
                   return BlogContainer(blog: bolg);
