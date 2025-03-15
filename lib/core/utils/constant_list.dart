@@ -20,26 +20,26 @@ class ConstantList {
 
   static List<FeatureModel> featureList = [
     FeatureModel(
-      label: "Patient",
-      shortDescription: "Manage patient records efficiently.",
+      label: 'feature_patient_label',
+      shortDescription: 'feature_patient_description',
       color: Colors.green,
       iconPath: "assets/icons/patient.png",
     ),
     FeatureModel(
-      label: "Medication",
-      shortDescription: "Track and organize medications easily.",
+      label: 'feature_medication_label',
+      shortDescription: 'feature_medication_description',
       color: Colors.blue,
       iconPath: "assets/icons/medication.png",
     ),
     FeatureModel(
-      label: "Summary",
-      shortDescription: "Get a quick health report overview.",
+      label: 'feature_summary_label',
+      shortDescription: 'feature_summary_description',
       color: Colors.deepOrange,
       iconPath: "assets/icons/summery.png",
     ),
     FeatureModel(
-      label: "Health Tips",
-      shortDescription: "Daily tips for a healthier lifestyle.",
+      label: 'feature_health_tips_label',
+      shortDescription: 'feature_health_tips_description',
       color: Colors.purple,
       iconPath: "assets/icons/tips.png",
     ),

@@ -6,5 +6,17 @@
   "select_drug": "Select Drug",
   "type_here": "Type here...",
   "select": "Select",
-  "hello": "Hello,"
+  "hello": "Hello,",
+
+  "feature_patient_label": "Patient",
+  "feature_patient_description": "Manage patient records efficiently.",
+
+  "feature_medication_label": "Medication",
+  "feature_medication_description": "Track and organize medications easily.",
+
+  "feature_summary_label": "Summary",
+  "feature_summary_description": "Get a quick health report overview.",
+
+  "feature_health_tips_label": "Health Tips",
+  "feature_health_tips_description": "Daily tips for a healthier lifestyle."
 }
