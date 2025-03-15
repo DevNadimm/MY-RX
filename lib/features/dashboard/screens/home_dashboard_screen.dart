@@ -42,7 +42,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
       drawer: const CustomNavigationDrawer(),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16),
+          padding: const EdgeInsets.symmetric(vertical: 12),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
