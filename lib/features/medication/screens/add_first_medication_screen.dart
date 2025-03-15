@@ -4,6 +4,7 @@ import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_utils/get_utils.dart';
 import 'package:new_app/features/medication/screens/add_medication_screen.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
+import 'package:new_app/shared/widgets/app_bar_leading_arrow.dart';
 import 'package:new_app/shared/widgets/circular_icon_container.dart';
 
 class AddFirstMedicationScreen extends StatefulWidget {
@@ -19,6 +20,7 @@ class _AddFirstMedicationScreenState extends State<AddFirstMedicationScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('add_medication'.tr),
+        leading: const AppBarLeadingArrow(),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(1.5),
           child: AppBarBottomDivider(),
