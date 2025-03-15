@@ -10,4 +10,5 @@ AppBarTheme appBarTheme = const AppBarTheme(
     color: AppColors.primaryTextColor,
   ),
   centerTitle: true,
+  surfaceTintColor: Colors.transparent,
 );
