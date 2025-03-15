@@ -6,6 +6,7 @@ import 'package:new_app/features/dashboard/widgets/blog_container.dart';
 import 'package:new_app/features/dashboard/widgets/custom_app_bar.dart';
 import 'package:new_app/features/dashboard/widgets/feature_container.dart';
 import 'package:new_app/features/dashboard/widgets/image_fade_carousel.dart';
+import 'package:new_app/features/dashboard/widgets/navigation_drawer.dart';
 import 'package:new_app/shared/models/feature_model.dart';
 import 'package:new_app/shared/widgets/section_header.dart';
 
@@ -17,20 +18,28 @@ class HomeDashboardScreen extends StatefulWidget {
 }
 
 class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: CustomAppBar(
           avatar: 'https://shorturl.at/Gg04h',
           userName: 'Nadim Chowdhury',
-          onTap: () {},
+          onTapNotificationBtn: () {},
+          onTapProfile: () {
+            _scaffoldKey.currentState?.openDrawer();
+          },
         ),
         bottom: const PreferredSize(
           preferredSize: Size.fromHeight(10),
           child: SizedBox(height: 10),
         ),
       ),
+      drawer: const CustomNavigationDrawer(),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 16),
@@ -71,7 +80,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: SectionHeader(
                   title: 'recent_blog'.tr,
-                  onSeeMoreTap: (){
+                  onSeeMoreTap: () {
                     /// Navigate to blog section
                   },
                 ),

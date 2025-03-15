@@ -7,36 +7,41 @@ import 'package:new_app/core/themes/colors.dart';
 class CustomAppBar extends StatelessWidget {
   final String avatar;
   final String userName;
-  final VoidCallback onTap;
+  final VoidCallback onTapProfile;
+  final VoidCallback onTapNotificationBtn;
 
   const CustomAppBar({
     super.key,
     required this.avatar,
     required this.userName,
-    required this.onTap,
+    required this.onTapNotificationBtn,
+    required this.onTapProfile,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        Container(
-          width: 52,
-          height: 52,
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(avatar),
-              fit: BoxFit.cover,
-              onError: (exception, stackTrace) {},
+        GestureDetector(
+          onTap: onTapProfile,
+          child: Container(
+            width: 52,
+            height: 52,
+            decoration: BoxDecoration(
+              shape: BoxShape.circle,
+              image: DecorationImage(
+                image: CachedNetworkImageProvider(avatar),
+                fit: BoxFit.cover,
+                onError: (exception, stackTrace) {},
+              ),
             ),
-          ),
-          child: ClipOval(
-            child: CachedNetworkImage(
-              imageUrl: avatar,
-              fit: BoxFit.cover,
-              placeholder: (context, url) => Image.asset("assets/images/avatar.jpg"),
-              errorWidget: (context, url, error) => Image.asset("assets/images/avatar.jpg"),
+            child: ClipOval(
+              child: CachedNetworkImage(
+                imageUrl: avatar,
+                fit: BoxFit.cover,
+                placeholder: (context, url) => Image.asset("assets/images/avatar.jpg"),
+                errorWidget: (context, url, error) => Image.asset("assets/images/avatar.jpg"),
+              ),
             ),
           ),
         ),
@@ -61,7 +66,7 @@ class CustomAppBar extends StatelessWidget {
           child: Material(
             color: Colors.white,
             child: InkWell(
-              onTap: onTap,
+              onTap: onTapNotificationBtn,
               splashColor: AppColors.primaryColor.withOpacity(0.2),
               child: const SizedBox(
                 height: 50,
