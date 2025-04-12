@@ -3,6 +3,7 @@ import 'package:new_app/core/themes/app_bar_theme.dart';
 import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/themes/elevated_button_theme.dart';
 import 'package:new_app/core/themes/input_decoration_theme.dart';
+import 'package:new_app/core/themes/text_selection_theme.dart';
 import 'package:new_app/core/themes/text_theme.dart';
 
 ThemeData appTheme = ThemeData(
@@ -11,5 +12,6 @@ ThemeData appTheme = ThemeData(
   appBarTheme: appBarTheme,
   elevatedButtonTheme: elevatedButtonTheme,
   textTheme: textTheme,
-  inputDecorationTheme: inputDecorationTheme
+  inputDecorationTheme: inputDecorationTheme,
+  textSelectionTheme: textSelectionTheme,
 );
