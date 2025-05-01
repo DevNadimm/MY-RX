@@ -11,6 +11,13 @@
   "recent_blog": "Recent Blog",
   "see_more": "See More",
 
+  "patient": "Patient",
+  "manage_patients": "Manage your patients below",
+  "add_patient": "Add Patient",
+  "add_patient_desc": "Register a new patient in the system",
+  "view_patient": "View Patient",
+  "view_patient_desc": "Browse and manage patient records",
+
   "feature_patient_label": "Patient",
   "feature_patient_description": "Manage patient records efficiently.",
 

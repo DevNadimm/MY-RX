@@ -11,6 +11,13 @@
   "recent_blog": "সাম্প্রতিক ব্লগ",
   "see_more": "আরো দেখুন",
 
+  "patient": "রোগী",
+  "manage_patients": "আপনার রোগীদের নিচে পরিচালনা করুন",
+  "add_patient": "রোগী যুক্ত করুন",
+  "add_patient_desc": "সিস্টেমে নতুন রোগী নিবন্ধন করুন",
+  "view_patient": "রোগী দেখুন",
+  "view_patient_desc": "রোগীর রেকর্ড ব্রাউজ এবং পরিচালনা করুন",
+
   "feature_patient_label": "রোগী",
   "feature_patient_description": "রোগীর রেকর্ড দক্ষতার সাথে পরিচালনা করুন।",
 

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/features/medication/screens/add_first_medication_screen.dart';
+import 'package:new_app/features/patient/screens/patient_screen.dart';
 import 'package:new_app/shared/models/feature_model.dart';
 
 class ConstantList {
@@ -26,7 +27,9 @@ class ConstantList {
       shortDescription: 'feature_patient_description',
       color: Colors.green,
       iconPath: "assets/icons/patient.png",
-      onTap: () {},
+      onTap: () {
+        Get.to(() => const PatientScreen());
+      },
     ),
     FeatureModel(
       label: 'feature_medication_label',
