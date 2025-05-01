@@ -65,8 +65,7 @@ class _HomeDashboardScreenState extends State<HomeDashboardScreen> {
                   scrollDirection: Axis.horizontal,
                   itemCount: 4,
                   padding: const EdgeInsets.symmetric(horizontal: 16),
-                  separatorBuilder: (context, index) =>
-                      const SizedBox(width: 16),
+                  separatorBuilder: (context, index) => const SizedBox(width: 16),
                   itemBuilder: (context, index) {
                     FeatureModel feature = ConstantList.featureList[index];
                     return FeatureContainer(

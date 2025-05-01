@@ -15,6 +15,7 @@ dependencies:
   shared_preferences: ^2.5.2
   hugeicons: ^0.0.7
   cached_network_image: ^3.4.1
+  flutter_launcher_icons: ^0.14.3
 
 
 dev_dependencies:
@@ -31,3 +32,12 @@ flutter:
     - assets/icons/
     - assets/images/
     - assets/images/temp/
+    - assets/logo/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/logo/my-rx-logo.png"
+  min_sdk_android: 21
+  adaptive_icon_foreground: "assets/logo/my-rx-logo.png"
+  adaptive_icon_background: "#ffffff"
