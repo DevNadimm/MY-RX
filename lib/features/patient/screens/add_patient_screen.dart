@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:new_app/features/patient/widgets/upload_image_section.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
 import 'package:new_app/shared/widgets/app_bar_leading_arrow.dart';
 import 'package:new_app/shared/widgets/custom_text_field.dart';
@@ -25,6 +28,8 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
   final _presentMedicationController = TextEditingController();
   final _heightController = TextEditingController();
   final _weightController = TextEditingController();
+  List<File> prescriptionImages = [];
+  List<File> reportImages = [];
 
   @override
   void dispose() {
@@ -146,6 +151,24 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                     ),
                   ),
                 ],
+              ),
+              const SizedBox(height: 16),
+              UploadImageSection(
+                title: "Upload Prescription",
+                onImagesChanged: (images) {
+                  setState(() {
+                    prescriptionImages = images;
+                  });
+                },
+              ),
+              const SizedBox(height: 16),
+              UploadImageSection(
+                title: "Upload Reports",
+                onImagesChanged: (images) {
+                  setState(() {
+                    reportImages = images;
+                  });
+                },
               ),
               const SizedBox(height: 24),
               SizedBox(
