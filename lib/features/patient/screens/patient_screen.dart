@@ -65,7 +65,7 @@ class PatientScreen extends StatelessWidget {
     return Material(
       elevation: 3,
       borderRadius: BorderRadius.circular(16),
-      color: Colors.white,
+      color: AppColors.containerColor,
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
         onTap: onTap,
