@@ -51,7 +51,7 @@ class CustomAppBar extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                'hello'.tr,
+                '${'hello'.tr}👋',
                 style: Theme.of(context).textTheme.titleSmall,
               ),
               Text(
