@@ -9,6 +9,8 @@ class CustomTextField extends StatelessWidget {
     this.isRequired = false,
     this.suffixText,
     this.keyboardType = TextInputType.text,
+    this.readOnly = false,
+    this.onTap,
   });
 
   final String label;
@@ -17,6 +19,8 @@ class CustomTextField extends StatelessWidget {
   final bool isRequired;
   final String? suffixText;
   final TextInputType keyboardType;
+  final bool readOnly;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +50,8 @@ class CustomTextField extends StatelessWidget {
         TextFormField(
           controller: controller,
           keyboardType: keyboardType,
+          readOnly: readOnly,
+          onTap: onTap,
           decoration: InputDecoration(
             hintText: effectiveHint,
             suffixText: suffixText,
