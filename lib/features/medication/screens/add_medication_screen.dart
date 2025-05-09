@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_utils/src/extensions/export.dart';
+import 'package:intl/intl.dart';
+import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/utils/constant_list.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
 import 'package:new_app/shared/widgets/app_bar_leading_arrow.dart';
 import 'package:new_app/shared/widgets/custom_bottom_sheet.dart';
+import 'package:new_app/shared/widgets/custom_text_field.dart';
 
 class AddMedicationScreen extends StatefulWidget {
   const AddMedicationScreen({super.key});
@@ -13,8 +16,26 @@ class AddMedicationScreen extends StatefulWidget {
 }
 
 class _AddMedicationScreenState extends State<AddMedicationScreen> {
+  final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController medicationName = TextEditingController();
   final TextEditingController drugType = TextEditingController();
+  final TextEditingController startDateTime = TextEditingController();
+  final TextEditingController endDateTime = TextEditingController();
+  final TextEditingController pickTimeController = TextEditingController();
+
+  String intakeTiming = 'Before Eat';
+
+  Future<void> _selectOnlyDate(TextEditingController controller) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2100),
+    );
+    if (picked != null) {
+      controller.text = DateFormat('dd/MM/yyyy').format(picked);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,50 +48,136 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
         ),
         leading: const AppBarLeadingArrow(),
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'medication_name_label'.tr,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: TextFormField(
+        child: Form(
+          key: globalKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              CustomTextField(
+                label: 'medication_name_label'.tr,
                 controller: medicationName,
-                decoration: InputDecoration(
-                  hintText: 'type_here'.tr,
-                ),
+                isRequired: true,
+                hintText: 'type_here'.tr,
               ),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'drug_type'.tr,
-              style: Theme.of(context).textTheme.titleMedium,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 10),
-              child: TextFormField(
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'medication_type'.tr,
+                hintText: 'select'.tr,
                 controller: drugType,
-                decoration: InputDecoration(
-                  hintText: 'select'.tr,
-                ),
+                isRequired: true,
                 readOnly: true,
                 onTap: () {
                   showCustomBottomSheet(
                     items: ConstantList.drugList,
                     controller: drugType,
-                    title: 'select_drug'.tr,
+                    title: 'select_medication'.tr,
                   );
                 },
               ),
-            ),
-          ],
+              const SizedBox(height: 16),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    child: CustomTextField(
+                      label: 'start_date'.tr,
+                      hintText: 'select_date'.tr,
+                      controller: startDateTime,
+                      isRequired: true,
+                      readOnly: true,
+                      onTap: () => _selectOnlyDate(startDateTime),
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: CustomTextField(
+                      label: 'end_date'.tr,
+                      hintText: 'select_date'.tr,
+                      controller: endDateTime,
+                      isRequired: true,
+                      readOnly: true,
+                      onTap: () => _selectOnlyDate(endDateTime),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'pick_time'.tr,
+                hintText: 'select_time'.tr,
+                controller: pickTimeController,
+                isRequired: true,
+                readOnly: true,
+                onTap: () async {
+                  final TimeOfDay? time = await showTimePicker(
+                    context: context,
+                    initialTime: TimeOfDay.now(),
+                  );
+                  if (time != null) {
+                    pickTimeController.text = time.format(context);
+                  }
+                },
+              ),
+              const SizedBox(height: 16),
+              Text('when_to_take'.tr, style: Theme.of(context).textTheme.titleMedium),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  _buildIntakeToggle('Before Eat'),
+                  const SizedBox(width: 16),
+                  _buildIntakeToggle('After Eat'),
+                ],
+              ),
+              const SizedBox(height: 24),
+              SizedBox(
+                width: double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: _saveMedication,
+                  child: Text('save_medication'.tr),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  Widget _buildIntakeToggle(String label) {
+    final bool isSelected = intakeTiming == label;
+    return Expanded(
+      child: GestureDetector(
+        onTap: () {
+          setState(() {
+            intakeTiming = label;
+          });
+        },
+        child: Container(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          decoration: BoxDecoration(
+            color:
+                isSelected ? AppColors.primaryColor : AppColors.primaryColor.withOpacity(0.1),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          child: Center(
+            child: Text(
+              label,
+              style: TextStyle(
+                color: isSelected ? Colors.white : Colors.black,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+
+  void _saveMedication() {
+    if (globalKey.currentState?.validate() ?? false) {}
   }
 
   Future<void> showCustomBottomSheet({
@@ -101,5 +208,15 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
         );
       },
     );
+  }
+
+  @override
+  void dispose() {
+    medicationName.dispose();
+    drugType.dispose();
+    startDateTime.dispose();
+    endDateTime.dispose();
+    pickTimeController.dispose();
+    super.dispose();
   }
 }
