@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:new_app/core/services/localization_service.dart';
 import 'package:new_app/core/themes/theme.dart';
-import 'package:new_app/features/dashboard/screens/home_dashboard_screen.dart';
+import 'package:new_app/features/auth/screens/splash_screen.dart';
 
 class MyApp extends StatelessWidget {
   final Locale locale;
@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
       locale: locale,
       fallbackLocale: LocalizationService.defaultLocale,
       translations: LocalizationService(),
-      home: const HomeDashboardScreen(),
+      home: const SplashScreen(),
     );
   }
 }

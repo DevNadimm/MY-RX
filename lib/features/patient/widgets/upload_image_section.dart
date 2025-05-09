@@ -52,7 +52,7 @@ class _UploadImageSectionState extends State<UploadImageSection> {
         GestureDetector(
           onTap: _pickImage,
           child: DottedBorder(
-            color: AppColors.primaryColor.withValues(alpha: 0.6),
+            color: AppColors.primaryColor.withOpacity(0.6),
             strokeWidth: 1.5,
             dashPattern: const [6, 3],
             borderType: BorderType.RRect,
@@ -90,12 +90,12 @@ class _UploadImageSectionState extends State<UploadImageSection> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(16),
                       border: Border.all(
-                        color: AppColors.primaryColor.withValues(alpha: 0.6),
+                        color: AppColors.primaryColor.withOpacity(0.6),
                         width: 1,
                       ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withValues(alpha: 0.1),
+                          color: Colors.black.withOpacity(0.1),
                           blurRadius: 6,
                           offset: const Offset(2, 2),
                         ),
@@ -114,11 +114,11 @@ class _UploadImageSectionState extends State<UploadImageSection> {
                       child: Container(
                         padding: const EdgeInsets.all(4),
                         decoration: BoxDecoration(
-                          color: Colors.white.withValues(alpha: 0.9),
+                          color: Colors.white.withOpacity(0.9),
                           shape: BoxShape.circle,
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withValues(alpha: 0.2),
+                              color: Colors.black.withOpacity(0.2),
                               blurRadius: 4,
                             ),
                           ],
