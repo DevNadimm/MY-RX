@@ -74,7 +74,7 @@ class PatientCard extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 20, color: AppColors.primaryColor.withValues(alpha: 0.7)),
+          Icon(icon, size: 20, color: AppColors.primaryColor.withOpacity(0.7)),
           const SizedBox(width: 8),
           Expanded(
             child: RichText(

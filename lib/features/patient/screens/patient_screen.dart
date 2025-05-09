@@ -81,7 +81,7 @@ class PatientScreen extends StatelessWidget {
                   gradient: LinearGradient(
                     colors: [
                       AppColors.primaryColor,
-                      AppColors.primaryColor.withValues(alpha: 0.6)
+                      AppColors.primaryColor.withOpacity(0.6)
                     ],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,

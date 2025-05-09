@@ -11,8 +11,8 @@ class ImageFadeCarousel extends StatefulWidget {
 
 class _ImageFadeCarouselState extends State<ImageFadeCarousel> {
   final List<String> imageList = [
-    "assets/images/temp/im1.jpg",
-    "assets/images/temp/im2.jpg",
+    "assets/images/temp/im3.jpg",
+    "assets/images/temp/im4.jpg",
   ];
 
   int _currentIndex = 0;
