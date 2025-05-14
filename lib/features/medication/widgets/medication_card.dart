@@ -10,55 +10,82 @@ class MedicationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    return Card(
-      elevation: 4,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-      margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
-      color: AppColors.containerColor,
-      child: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            // Name and type row
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
+    return Container(
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 16),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(16),
+        color: AppColors.containerColor,
+        border: const Border(left: BorderSide(width: 4, color: AppColors.primaryColor)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.05),
+            blurRadius: 8,
+            offset: const Offset(0, 4),
+          ),
+        ],
+      ),
+      child: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  medication.name,
-                  style: theme.textTheme.titleMedium!.copyWith(fontWeight: FontWeight.bold),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      medication.name,
+                      style: theme.textTheme.titleMedium!.copyWith(
+                        fontWeight: FontWeight.w600,
+                        fontSize: 18,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 12, vertical: 4),
+                      decoration: BoxDecoration(
+                        color: AppColors.primaryColor.withOpacity(0.1),
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      child: Text(
+                        medication.type,
+                        style: const TextStyle(
+                          color: AppColors.primaryColor,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
-                Chip(
-                  label: Text(medication.type),
-                  backgroundColor: AppColors.primaryColor.withOpacity(0.1),
-                  labelStyle: const TextStyle(color: AppColors.primaryColor),
+                const SizedBox(height: 14),
+
+                Row(
+                  children: [
+                    const Icon(Icons.calendar_today,
+                        size: 18, color: Colors.grey),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text('From: ${medication.startDate}')),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text('To: ${medication.endDate}')),
+                  ],
+                ),
+                const SizedBox(height: 10),
+
+                Row(
+                  children: [
+                    const Icon(Icons.access_time, size: 18, color: Colors.grey),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text('At: ${medication.time}')),
+                    const SizedBox(width: 8),
+                    Expanded(child: Text('(${medication.whenToTake})')),
+                  ],
                 ),
               ],
             ),
-            const SizedBox(height: 12),
-            // Dates row
-            Row(
-              children: [
-                const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
-                const SizedBox(width: 6),
-                Text('From: ${medication.startDate}'),
-                const SizedBox(width: 12),
-                Text('To: ${medication.endDate}'),
-              ],
-            ),
-            const SizedBox(height: 8),
-            // Time and timing row
-            Row(
-              children: [
-                const Icon(Icons.access_time, size: 16, color: Colors.grey),
-                const SizedBox(width: 6),
-                Text('At: ${medication.time}'),
-                const SizedBox(width: 12),
-                Text('(${medication.whenToTake})'),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

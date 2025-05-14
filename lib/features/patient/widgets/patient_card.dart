@@ -47,18 +47,6 @@ class PatientCard extends StatelessWidget {
 
             const Divider(height: 20, thickness: 1),
 
-            // Medical Info
-            _buildInfoRow(Icons.medical_services, "Chief Complain",
-                patient.chiefComplain),
-            _buildInfoRow(
-                Icons.family_restroom, "Family Disease", patient.familyDisease),
-            _buildInfoRow(
-                Icons.local_hospital, "OT History", patient.otHistory),
-            _buildInfoRow(
-                Icons.medication, "Medication", patient.presentMedication),
-
-            const Divider(height: 20, thickness: 1),
-
             // Physical Info
             _buildInfoRow(Icons.height, "Height", patient.height),
             _buildInfoRow(Icons.monitor_weight, "Weight", patient.weight),
