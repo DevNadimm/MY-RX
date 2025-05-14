@@ -37,10 +37,7 @@ class MedicationCard extends StatelessWidget {
                   children: [
                     Text(
                       medication.name,
-                      style: theme.textTheme.titleMedium!.copyWith(
-                        fontWeight: FontWeight.w600,
-                        fontSize: 18,
-                      ),
+                      style: theme.textTheme.headlineSmall,
                     ),
                     Container(
                       padding: const EdgeInsets.symmetric(
