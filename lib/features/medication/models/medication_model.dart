@@ -1,4 +1,5 @@
 class MedicationModel {
+  final int id;
   final String name;
   final String type;
   final String startDate;
@@ -7,6 +8,7 @@ class MedicationModel {
   final String whenToTake;
 
   MedicationModel({
+    required this.id,
     required this.name,
     required this.type,
     required this.startDate,
@@ -18,6 +20,7 @@ class MedicationModel {
   // Convert a MedicationModel into a Map (for SQLite or storage)
   Map<String, dynamic> toMap() {
     return {
+      'id': id,
       'name': name,
       'type': type,
       'startDate': startDate,
@@ -30,6 +33,7 @@ class MedicationModel {
   // Create a MedicationModel from a Map
   factory MedicationModel.fromMap(Map<String, dynamic> map) {
     return MedicationModel(
+      id: map['id'],
       name: map['name'],
       type: map['type'],
       startDate: map['startDate'],
