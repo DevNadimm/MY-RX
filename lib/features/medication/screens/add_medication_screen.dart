@@ -3,6 +3,8 @@ import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:intl/intl.dart';
 import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/utils/constant_list.dart';
+import 'package:new_app/features/medication/database/db_helper.dart';
+import 'package:new_app/features/medication/models/medication_model.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
 import 'package:new_app/shared/widgets/app_bar_leading_arrow.dart';
 import 'package:new_app/shared/widgets/custom_bottom_sheet.dart';
@@ -18,10 +20,10 @@ class AddMedicationScreen extends StatefulWidget {
 class _AddMedicationScreenState extends State<AddMedicationScreen> {
   final GlobalKey<FormState> globalKey = GlobalKey();
   final TextEditingController medicationName = TextEditingController();
-  final TextEditingController drugType = TextEditingController();
-  final TextEditingController startDateTime = TextEditingController();
-  final TextEditingController endDateTime = TextEditingController();
-  final TextEditingController pickTimeController = TextEditingController();
+  final TextEditingController medicationType = TextEditingController();
+  final TextEditingController startDate = TextEditingController();
+  final TextEditingController endDate = TextEditingController();
+  final TextEditingController pickTime = TextEditingController();
 
   String intakeTiming = 'Before Eat';
 
@@ -65,13 +67,13 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
               CustomTextField(
                 label: 'medication_type'.tr,
                 hintText: 'select'.tr,
-                controller: drugType,
+                controller: medicationType,
                 isRequired: true,
                 readOnly: true,
                 onTap: () {
                   showCustomBottomSheet(
                     items: ConstantList.drugList,
-                    controller: drugType,
+                    controller: medicationType,
                     title: 'select_medication'.tr,
                   );
                 },
@@ -84,10 +86,10 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                     child: CustomTextField(
                       label: 'start_date'.tr,
                       hintText: 'select_date'.tr,
-                      controller: startDateTime,
+                      controller: startDate,
                       isRequired: true,
                       readOnly: true,
-                      onTap: () => _selectOnlyDate(startDateTime),
+                      onTap: () => _selectOnlyDate(startDate),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -95,10 +97,10 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                     child: CustomTextField(
                       label: 'end_date'.tr,
                       hintText: 'select_date'.tr,
-                      controller: endDateTime,
+                      controller: endDate,
                       isRequired: true,
                       readOnly: true,
-                      onTap: () => _selectOnlyDate(endDateTime),
+                      onTap: () => _selectOnlyDate(endDate),
                     ),
                   ),
                 ],
@@ -107,7 +109,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
               CustomTextField(
                 label: 'pick_time'.tr,
                 hintText: 'select_time'.tr,
-                controller: pickTimeController,
+                controller: pickTime,
                 isRequired: true,
                 readOnly: true,
                 onTap: () async {
@@ -116,7 +118,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                     initialTime: TimeOfDay.now(),
                   );
                   if (time != null) {
-                    pickTimeController.text = time.format(context);
+                    pickTime.text = time.format(context);
                   }
                 },
               ),
@@ -176,8 +178,20 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     );
   }
 
-  void _saveMedication() {
-    if (globalKey.currentState?.validate() ?? false) {}
+  void _saveMedication() async {
+    if (globalKey.currentState?.validate() ?? false) {
+      final medication = MedicationModel(
+        name: medicationName.text.toString(),
+        type: medicationType.text.toString(),
+        startDate: startDate.text.toString(),
+        endDate: endDate.text.toString(),
+        time: pickTime.text.toString(),
+        whenToTake: intakeTiming,
+      );
+
+      int id = await DBHelper.createMedication(medication);
+      debugPrint('Inserted successfully with ID: $id');
+    }
   }
 
   Future<void> showCustomBottomSheet({
@@ -213,10 +227,10 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   @override
   void dispose() {
     medicationName.dispose();
-    drugType.dispose();
-    startDateTime.dispose();
-    endDateTime.dispose();
-    pickTimeController.dispose();
+    medicationType.dispose();
+    startDate.dispose();
+    endDate.dispose();
+    pickTime.dispose();
     super.dispose();
   }
 }

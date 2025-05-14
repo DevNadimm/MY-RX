@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:new_app/core/temp/medication_list.dart';
+import 'package:new_app/features/medication/database/db_helper.dart';
+import 'package:new_app/features/medication/models/medication_model.dart';
 import 'package:new_app/features/medication/widgets/medication_card.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
 import 'package:new_app/shared/widgets/app_bar_leading_arrow.dart';
@@ -12,6 +13,23 @@ class ViewMedicationScreen extends StatefulWidget {
 }
 
 class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
+  List<MedicationModel> medicationList = [];
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    readMedication();
+  }
+
+  Future<void> readMedication() async {
+    final meds = await DBHelper.readMedication();
+    setState(() {
+      medicationList = meds;
+      isLoading = false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,16 +41,20 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
           child: AppBarBottomDivider(),
         ),
       ),
-      body: medications.isEmpty
-          ? const Center(child: Text('No active medications'))
-          : ListView.builder(
-              padding: const EdgeInsets.all(5),
-              itemCount: medications.length,
-              itemBuilder: (context, index) {
-                final medication = medications[index];
-                return MedicationCard(medication: medication);
-              },
-            ),
+      body: Visibility(
+        visible: !isLoading,
+        replacement: const Center(child: CircularProgressIndicator()),
+        child: medicationList.isEmpty
+            ? const Center(child: Text('No active medications'))
+            : ListView.builder(
+                padding: const EdgeInsets.all(5),
+                itemCount: medicationList.length,
+                itemBuilder: (context, index) {
+                  final medication = medicationList[index];
+                  return MedicationCard(medication: medication);
+                },
+              ),
+      ),
     );
   }
 }
