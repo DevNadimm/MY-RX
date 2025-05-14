@@ -7,7 +7,7 @@ final List<MedicationModel> medications = [
     startDate: '2025-05-01',
     endDate: '2025-05-07',
     time: '08:00 AM',
-    timing: 'Before Eat',
+    whenToTake: 'Before Eat',
   ),
   MedicationModel(
     name: 'Ibuprofen',
@@ -15,6 +15,6 @@ final List<MedicationModel> medications = [
     startDate: '2025-05-02',
     endDate: '2025-05-10',
     time: '06:00 PM',
-    timing: 'After Eat',
+    whenToTake: 'After Eat',
   ),
 ];

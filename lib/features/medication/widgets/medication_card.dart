@@ -54,7 +54,7 @@ class MedicationCard extends StatelessWidget {
                 const SizedBox(width: 6),
                 Text('At: ${medication.time}'),
                 const SizedBox(width: 12),
-                Text('(${medication.timing})'),
+                Text('(${medication.whenToTake})'),
               ],
             ),
           ],
