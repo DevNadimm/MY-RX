@@ -7,18 +7,20 @@ class ToastMessage {
   static success(String message) {
     toastification.show(
       title: Text(message),
-      style: ToastificationStyle.flat,
+      style: ToastificationStyle.flatColored,
       type: ToastificationType.success,
-      autoCloseDuration: const Duration(seconds: 3),
+      autoCloseDuration: const Duration(seconds: 5),
+      alignment: Alignment.topCenter,
     );
   }
 
   static error(String message) {
     toastification.show(
       title: Text(message),
-      style: ToastificationStyle.flat,
+      style: ToastificationStyle.flatColored,
       type: ToastificationType.error,
-      autoCloseDuration: const Duration(seconds: 3),
+      autoCloseDuration: const Duration(seconds: 5),
+      alignment: Alignment.topCenter,
     );
   }
 }
