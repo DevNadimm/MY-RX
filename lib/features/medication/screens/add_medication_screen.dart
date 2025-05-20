@@ -3,6 +3,7 @@ import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:intl/intl.dart';
 import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/utils/constant_list.dart';
+import 'package:new_app/features/medication/controllers/notification_controller.dart';
 import 'package:new_app/features/medication/database/db_helper.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
@@ -35,7 +36,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       lastDate: DateTime(2100),
     );
     if (picked != null) {
-      controller.text = DateFormat('dd/MM/yyyy').format(picked);
+      controller.text = DateFormat('yyyy-MM-dd').format(picked);
     }
   }
 
@@ -190,6 +191,8 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       );
 
       int id = await DBHelper.createMedication(medication);
+      NotificationController.scheduleMedicationNotifications(medication);
+      clearFields();
       debugPrint('Inserted successfully with ID: $id');
     }
   }
@@ -232,5 +235,13 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
     endDate.dispose();
     pickTime.dispose();
     super.dispose();
+  }
+
+  void clearFields() {
+    medicationName.clear();
+    medicationType.clear();
+    startDate.clear();
+    endDate.clear();
+    pickTime.clear();
   }
 }

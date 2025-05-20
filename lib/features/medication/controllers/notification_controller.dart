@@ -13,8 +13,7 @@ class NotificationController {
     final TimeOfDay timeOfDay = HelperFunctions.convertTo24HourTime(medication.time);
 
     DateTime currentDate = startDate;
-    int notificationId = (medication.id ?? DateTime.now().millisecondsSinceEpoch) % 2147483647;
-    int baseId = (medication.id ?? DateTime.now().millisecondsSinceEpoch) % 2147483647;
+    int baseId = (medication.id ?? DateTime.now().millisecondsSinceEpoch) % 2147480;
     int dayIndex = 0;
 
     while (!currentDate.isAfter(endDate)) {
@@ -27,16 +26,21 @@ class NotificationController {
       );
 
       if (scheduledDateTime.isAfter(DateTime.now())) {
+        int uniqueNotificationId = baseId * 1000 + dayIndex;
+        String title = HelperFunctions.getRandomNotificationTitle();
+        String body = HelperFunctions.getRandomNotificationBody(medication);
+
         NotificationService().scheduleNotification(
-          id: notificationId++,
-          title: 'Time to take your medication',
-          body: '${medication.name} - ${medication.type}',
+          id: uniqueNotificationId,
+          title: title,
+          body: body,
           scheduledDateTime: scheduledDateTime,
         );
-        debugPrint('Scheduled notification for $scheduledDateTime');
+        debugPrint('Scheduled notification for $scheduledDateTime with ID: $uniqueNotificationId');
       }
 
       currentDate = currentDate.add(const Duration(days: 1));
+      dayIndex++;
     }
   }
 
