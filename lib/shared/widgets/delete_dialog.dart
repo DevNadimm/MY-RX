@@ -7,13 +7,13 @@ class DeleteDialog extends StatelessWidget {
     required this.title,
     required this.subTitle,
     required this.onDelete,
-    this.deleteText = "Delete",
+    this.deleteBtnText = "Delete",
   });
 
   final String title;
   final String subTitle;
   final VoidCallback onDelete;
-  String deleteText;
+  String deleteBtnText;
 
   @override
   Widget build(BuildContext context) {
@@ -65,7 +65,7 @@ class DeleteDialog extends StatelessWidget {
                       backgroundColor: Colors.redAccent,
                     ),
                     child: Text(
-                      deleteText,
+                      deleteBtnText,
                       style: Theme.of(context)
                           .textTheme
                           .titleLarge!
