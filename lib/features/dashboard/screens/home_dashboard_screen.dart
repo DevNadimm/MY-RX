@@ -7,9 +7,9 @@ import 'package:new_app/features/dashboard/widgets/custom_app_bar.dart';
 import 'package:new_app/features/dashboard/widgets/feature_container.dart';
 import 'package:new_app/features/dashboard/widgets/image_fade_carousel.dart';
 import 'package:new_app/features/dashboard/widgets/navigation_drawer.dart';
+import 'package:new_app/features/dashboard/widgets/section_header.dart';
 import 'package:new_app/features/health_tips/screens/blog_list_screen.dart';
 import 'package:new_app/shared/models/feature_model.dart';
-import 'package:new_app/shared/widgets/section_header.dart';
 
 class HomeDashboardScreen extends StatefulWidget {
   const HomeDashboardScreen({super.key});
