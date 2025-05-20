@@ -24,15 +24,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
   @override
   void initState() {
     super.initState();
-    readMedication();
-  }
-
-  Future<void> readMedication() async {
-    final meds = await DBHelper.readMedication();
-    setState(() {
-      medicationList = meds;
-      isLoading = false;
-    });
+    readMedications();
   }
 
   @override
@@ -45,7 +37,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
           medicationList.isNotEmpty
               ? IconButton(
                   onPressed: () {
-                    deleteAllMeds();
+                    deleteAllMedications();
                   },
                   icon: const Icon(
                     HugeIcons.strokeRoundedDelete02,
@@ -78,7 +70,32 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
     );
   }
 
-  void deleteAllMeds() {
+  Future<void> readMedications() async {
+    medicationList = await DBHelper.readMedication();;
+
+    // Delete inactive medications
+    await deleteInActiveMedications();
+
+    setState(() {
+      isLoading = false;
+    });
+  }
+
+  Future<void> deleteInActiveMedications() async {
+    final currentDate = DateTime.now();
+    final today = DateTime(currentDate.year, currentDate.month, currentDate.day);
+
+    for (var med in medicationList) {
+      final end = DateTime.parse(med.endDate);
+      final medEndDate = DateTime(end.year, end.month, end.day);
+
+      if (today.isAfter(medEndDate)) {
+        await DBHelper.deleteMedication(med.id!);
+      }
+    }
+  }
+
+  void deleteAllMedications() {
     showDialog(
       context: context,
       builder: (context) => DeleteDialog(
