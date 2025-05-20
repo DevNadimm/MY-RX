@@ -25,15 +25,15 @@ class HelperFunctions {
   /// Generate Notification Body
   static String getRandomNotificationBody (MedicationModel med) {
     final options = [
-      'Time to take **${med.name}** (${med.type}) – ${med.whenToTake}. Stay strong!',
-      'Take your ${med.type} **${med.name}** as planned – ${med.whenToTake}. You got this!',
-      'Health first! It’s time for **${med.name}** – ${med.whenToTake}.',
-      'Keep going! Don’t forget **${med.name}** (${med.type}) – ${med.whenToTake}.',
-      'Here’s your reminder to take **${med.name}** – ${med.whenToTake}.',
-      'Stay consistent with your meds – **${med.name}**, ${med.type}, now due.',
-      'Taking **${med.name}** (${med.type}) now will help you feel better soon.',
-      'You’re one step closer to wellness. Take **${med.name}** – ${med.whenToTake}.',
-      '**${med.name}** time! Let’s keep you healthy – ${med.whenToTake}.',
+      'Time to take ${med.name} (${med.type}) – ${med.whenToTake}. Stay strong!',
+      'Take your ${med.type} ${med.name} as planned – ${med.whenToTake}. You got this!',
+      'Health first! It’s time for ${med.name} – ${med.whenToTake}.',
+      'Keep going! Don’t forget ${med.name} (${med.type}) – ${med.whenToTake}.',
+      'Here’s your reminder to take ${med.name} – ${med.whenToTake}.',
+      'Stay consistent with your meds – ${med.name}, ${med.type}, now due.',
+      'Taking ${med.name} (${med.type}) now will help you feel better soon.',
+      'You’re one step closer to wellness. Take ${med.name} – ${med.whenToTake}.',
+      '${med.name} time! Let’s keep you healthy – ${med.whenToTake}.',
     ];
     return options[Random().nextInt(options.length)];
   }
