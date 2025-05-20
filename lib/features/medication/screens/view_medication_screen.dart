@@ -90,6 +90,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
       final medEndDate = DateTime(end.year, end.month, end.day);
 
       if (today.isAfter(medEndDate)) {
+        medicationList.removeWhere((e) => e.id == med.id);
         await DBHelper.deleteMedication(med.id!);
       }
     }
