@@ -17,7 +17,7 @@ class MedicationModel {
     required this.whenToTake,
   });
 
-  // Convert a MedicationModel into a Map
+  /// Convert a MedicationModel into a Map
   Map<String, dynamic> toMap() {
     final Map<String, dynamic> map = {
       'name': name,
@@ -33,7 +33,7 @@ class MedicationModel {
     return map;
   }
 
-  // Create a MedicationModel from a Map
+  /// Create a MedicationModel from a Map
   factory MedicationModel.fromMap(Map<String, dynamic> map) {
     return MedicationModel(
       id: map['id'],
