@@ -4,6 +4,7 @@ import 'package:new_app/features/medication/models/medication_model.dart';
 import 'package:new_app/features/medication/widgets/medication_card.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
 import 'package:new_app/shared/widgets/app_bar_leading_arrow.dart';
+import 'package:new_app/shared/widgets/empty_list.dart';
 
 class ViewMedicationScreen extends StatefulWidget {
   const ViewMedicationScreen({super.key});
@@ -45,7 +46,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
         visible: !isLoading,
         replacement: const Center(child: CircularProgressIndicator()),
         child: medicationList.isEmpty
-            ? const Center(child: Text('No active medications'))
+            ? const EmptyList(title: 'No Medications Listed Yet',)
             : ListView.builder(
                 padding: const EdgeInsets.all(5),
                 itemCount: medicationList.length,
