@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
 
 class HelperFunctions {
@@ -35,6 +36,13 @@ class HelperFunctions {
       '${med.name} time! Let’s keep you healthy – ${med.whenToTake}.',
     ];
     return options[Random().nextInt(options.length)];
+  }
+
+  /// Date format (2025-05-24 -> May 24, 2025)
+  static String formatDate (String dateString) {
+    final date = DateTime.parse(dateString);
+    final formatter = DateFormat.yMMMMd();
+    return formatter.format(date);
   }
 
   static TimeOfDay convertTo24HourTime(String time12Hour) {

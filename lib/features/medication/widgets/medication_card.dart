@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:new_app/core/themes/colors.dart';
+import 'package:new_app/core/utils/helper_functions.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
 
 class MedicationCard extends StatelessWidget {
@@ -63,9 +64,9 @@ class MedicationCard extends StatelessWidget {
                     const Icon(Icons.calendar_today,
                         size: 18, color: Colors.grey),
                     const SizedBox(width: 8),
-                    Expanded(child: Text('From: ${medication.startDate}')),
+                    Expanded(child: Text('From: ${HelperFunctions.formatDate(medication.startDate)}')),
                     const SizedBox(width: 8),
-                    Expanded(child: Text('To: ${medication.endDate}')),
+                    Expanded(child: Text('To: ${HelperFunctions.formatDate(medication.endDate)}')),
                   ],
                 ),
                 const SizedBox(height: 10),
