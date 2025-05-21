@@ -79,7 +79,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
   Future<void> readMedications() async {
     medicationList = await DBHelper.readMedication();;
 
-    // Delete inactive medications
+    /// Delete inactive medications
     await deleteInActiveMedications();
 
     setState(() {
@@ -121,10 +121,10 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
 
             medicationList.clear();
             setState(() {});
-            ToastMessage.success("All medications deleted successfully");
+            ToastMessage.success("All medications have been deleted successfully.");
           } catch (e) {
             debugPrint("Error Occurred when deleting all medications: $e");
-            ToastMessage.error("Failed to delete medications. Please try again.");
+            ToastMessage.error("Failed to delete all medications. Please try again.");
           }
         },
       ),
@@ -150,10 +150,10 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
             setState(() {
               medicationList.removeWhere((e) => e.id == medication.id);
             });
-            ToastMessage.success("Medication deleted successfully");
+            ToastMessage.success("The medication has been deleted successfully.");
           } catch (e) {
-            debugPrint("Error Occurred when deleting medications: $e");
-            ToastMessage.error("Failed to delete medication. Please try again.");
+            debugPrint("Error Occurred when deleting medication: $e");
+            ToastMessage.error("Failed to delete the medication. Please try again.");
           }
         },
       ),
