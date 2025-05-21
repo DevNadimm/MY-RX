@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:new_app/core/utils/toast_message.dart';
+import 'package:new_app/features/medication/controllers/notification_controller.dart';
 import 'package:new_app/features/medication/database/db_helper.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
 import 'package:new_app/features/medication/services/notification_service.dart';
@@ -63,7 +64,12 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
                 itemCount: medicationList.length,
                 itemBuilder: (context, index) {
                   final medication = medicationList[index];
-                  return MedicationCard(medication: medication);
+                  return MedicationCard(
+                    medication: medication,
+                    onDelete: () {
+                      deleteMedication(medication);
+                    },
+                  );
                 },
               ),
       ),
@@ -107,7 +113,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
           try {
             Navigator.of(context).pop();
 
-            /// Delete all medications
+            /// Delete all medications from DB
             await Future.wait(medicationList.map((med) => DBHelper.deleteMedication(med.id!)));
 
             /// Cancel all notifications
@@ -119,6 +125,35 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
           } catch (e) {
             debugPrint("Error Occurred when deleting all medications: $e");
             ToastMessage.error("Failed to delete medications. Please try again.");
+          }
+        },
+      ),
+    );
+  }
+
+  deleteMedication(MedicationModel medication) {
+    showDialog(
+      context: context,
+      builder: (_) => DeleteDialog(
+        title: "Delete this medication?",
+        subTitle: "This action cannot be undone.\nAre you sure you want to permanently remove this medication from your list?",
+        onDelete: () async {
+          try {
+            Navigator.of(context).pop();
+
+            /// Delete medication from DB
+            await DBHelper.deleteMedication(medication.id!);
+
+            /// Cancel notification
+            NotificationController.cancelMedicationNotifications(medication);
+
+            setState(() {
+              medicationList.removeWhere((e) => e.id == medication.id);
+            });
+            ToastMessage.success("Medication deleted successfully");
+          } catch (e) {
+            debugPrint("Error Occurred when deleting medications: $e");
+            ToastMessage.error("Failed to delete medication. Please try again.");
           }
         },
       ),
