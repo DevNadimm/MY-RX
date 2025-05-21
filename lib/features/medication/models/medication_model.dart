@@ -1,5 +1,5 @@
 class MedicationModel {
-  final int? id;
+  int? id;
   final String name;
   final String type;
   final String startDate;

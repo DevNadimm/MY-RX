@@ -191,6 +191,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
       );
 
       int id = await DBHelper.createMedication(medication);
+      medication.id = id; // Update id for notification controller (notification id)
       NotificationController.scheduleMedicationNotifications(medication);
       clearFields();
       debugPrint('Inserted successfully with ID: $id');
