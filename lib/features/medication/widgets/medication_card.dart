@@ -5,8 +5,9 @@ import 'package:new_app/features/medication/models/medication_model.dart';
 
 class MedicationCard extends StatelessWidget {
   final MedicationModel medication;
+  final VoidCallback onDelete;
 
-  const MedicationCard({super.key, required this.medication});
+  const MedicationCard({super.key, required this.medication, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -58,19 +59,24 @@ class MedicationCard extends StatelessWidget {
                   ],
                 ),
                 const SizedBox(height: 14),
-
                 Row(
                   children: [
-                    const Icon(Icons.calendar_today,
-                        size: 18, color: Colors.grey),
+                    const Icon(
+                      Icons.calendar_today,
+                      size: 18,
+                      color: Colors.grey,
+                    ),
                     const SizedBox(width: 8),
-                    Expanded(child: Text('From: ${HelperFunctions.formatDate(medication.startDate)}')),
+                    Expanded(
+                      child: Text('From: ${HelperFunctions.formatDate(medication.startDate)}'),
+                    ),
                     const SizedBox(width: 8),
-                    Expanded(child: Text('To: ${HelperFunctions.formatDate(medication.endDate)}')),
+                    Expanded(
+                      child: Text('To: ${HelperFunctions.formatDate(medication.endDate)}'),
+                    ),
                   ],
                 ),
                 const SizedBox(height: 10),
-
                 Row(
                   children: [
                     const Icon(Icons.access_time, size: 18, color: Colors.grey),
@@ -78,6 +84,36 @@ class MedicationCard extends StatelessWidget {
                     Expanded(child: Text('At: ${medication.time}')),
                     const SizedBox(width: 8),
                     Expanded(child: Text('(${medication.whenToTake})')),
+                  ],
+                ),
+                const SizedBox(height: 10),
+                Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: AppColors.primaryColor.withOpacity(0.2),
+                          foregroundColor: Colors.black,
+                          elevation: 0,
+                          side: const BorderSide(width: 1, color: AppColors.primaryColor),
+                        ),
+                        child: const Text("Edit"),
+                      ),
+                    ),
+                    const SizedBox(width: 10),
+                    Expanded(
+                      child: ElevatedButton(
+                        onPressed: onDelete,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.red.withOpacity(0.2),
+                          foregroundColor: Colors.black,
+                          elevation: 0,
+                          side: const BorderSide(width: 1, color: Colors.red),
+                        ),
+                        child: const Text("Delete"),
+                      ),
+                    ),
                   ],
                 ),
               ],
