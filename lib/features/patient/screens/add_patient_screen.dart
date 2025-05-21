@@ -176,7 +176,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _submit,
-                  child: const Text("Add"),
+                  child: const Text("Save Patient"),
                 ),
               ),
             ],
