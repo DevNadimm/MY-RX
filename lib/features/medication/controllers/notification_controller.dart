@@ -49,14 +49,13 @@ class NotificationController {
     final DateTime startDate = dateFormat.parse(medication.startDate);
     final DateTime endDate = dateFormat.parse(medication.endDate);
 
-    final int baseId = (medication.id ?? 0) % 2147483647;
+    final int baseId = (medication.id ?? 0) % 2147480;
     int dayIndex = 0;
     DateTime currentDate = startDate;
 
     while (!currentDate.isAfter(endDate)) {
       final int notificationId = baseId * 1000 + dayIndex;
       NotificationService().cancelNotification(notificationId);
-      debugPrint('Cancelled notification ID: $notificationId');
       currentDate = currentDate.add(const Duration(days: 1));
       dayIndex++;
     }
