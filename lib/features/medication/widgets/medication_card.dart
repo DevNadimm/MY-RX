@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/utils/helper_functions.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
+import 'package:new_app/features/medication/screens/edit_medication_screen.dart';
 
 class MedicationCard extends StatelessWidget {
   final MedicationModel medication;
@@ -91,7 +93,9 @@ class MedicationCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Get.to(() => EditMedicationScreen(medication: medication,));
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryColor.withOpacity(0.2),
                           foregroundColor: Colors.black,
