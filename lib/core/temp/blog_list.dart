@@ -35,20 +35,20 @@ List<BlogContent> blogList = [
     author: "Dr. Lena Chow",
     content: "A healthy gut supports digestion, immunity, and even mental health. Eating fermented foods like yogurt, kefir, and kimchi can boost good bacteria. Fiber-rich foods like fruits, vegetables, and whole grains also help. Avoiding excess sugar and processed foods is key to gut health.",
     date: "April 25, 2025",
-    bannerImage: "https://shorturl.at/ODTZd",
+    bannerImage: "https://shorturl.at/rI4Rm",
   ),
   BlogContent(
     title: "Benefits of Walking: The Most Underrated Exercise",
     author: "Mark Thompson",
     content: "Walking improves cardiovascular fitness, strengthens muscles, and helps maintain a healthy weight. It also boosts mood and reduces stress. A daily 30-minute brisk walk can lead to long-term health benefits without needing a gym membership or equipment.",
     date: "April 20, 2025",
-    bannerImage: "https://shorturl.at/ODTZd",
+    bannerImage: "https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1000w,f_auto,q_auto:best/newscms/2017_35/2136986/170829-better-two-people-walking-path-se-612p.jpg",
   ),
   BlogContent(
     title: "Understanding Sleep Cycles for Better Rest",
     author: "Dr. Priya Desai",
     content: "Sleep is composed of different cycles including REM and non-REM stages. Disruptions in these cycles can lead to fatigue and poor concentration. Maintaining a consistent sleep schedule, avoiding caffeine before bedtime, and creating a calming environment can improve sleep quality.",
     date: "April 15, 2025",
-    bannerImage: "https://shorturl.at/ODTZd",
+    bannerImage: "https://shorturl.at/7pcl7",
   ),
 ];

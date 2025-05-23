@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:new_app/core/temp/blog_list.dart';
 import 'package:new_app/shared/widgets/app_bar_bottom_divider.dart';
@@ -34,10 +35,13 @@ class BlogViewScreen extends StatelessWidget {
                 ),
                 child: AspectRatio(
                   aspectRatio: 16 / 9,
-                  child: Image.network(
-                    blog.bannerImage,
+                  child: CachedNetworkImage(
+                    imageUrl: blog.bannerImage,
                     fit: BoxFit.cover,
-                    errorBuilder: (context, error, stackTrace) => const Center(
+                    placeholder: (context, url) => const Center(
+                      child: CircularProgressIndicator(strokeWidth: 2),
+                    ),
+                    errorWidget: (context, url, error) => const Center(
                       child: Icon(Icons.broken_image, size: 100),
                     ),
                   ),

@@ -82,7 +82,8 @@ class NotificationService {
           ),
         ),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-        matchDateTimeComponents: DateTimeComponents.dateAndTime,
+        // Removed 'matchDateTimeComponents' to prevent notifications from repeating daily at the same time — we want one-time scheduled notifications only.
+        // matchDateTimeComponents: DateTimeComponents.dateAndTime,
       );
     } catch (e) {
       debugPrint('Exact alarm failed: $e');
@@ -103,7 +104,7 @@ class NotificationService {
           ),
         ),
         androidScheduleMode: AndroidScheduleMode.inexact,
-        matchDateTimeComponents: DateTimeComponents.dateAndTime,
+        // matchDateTimeComponents: DateTimeComponents.dateAndTime,
       );
     }
   }
