@@ -83,6 +83,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                 controller: medicationName,
                 isRequired: true,
                 hintText: 'type_here'.tr,
+                validationLabel: 'Medication name',
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -91,8 +92,9 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                 controller: medicationType,
                 isRequired: true,
                 readOnly: true,
+                validationLabel: 'Medication type',
                 onTap: () {
-                  showCustomBottomSheet(
+                  _showCustomBottomSheet(
                     items: ConstantList.drugList,
                     controller: medicationType,
                     title: 'select_medication'.tr,
@@ -110,6 +112,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                       controller: startDate,
                       isRequired: true,
                       readOnly: true,
+                      validationLabel: 'Start date',
                       onTap: () => _selectOnlyDate(startDate),
                     ),
                   ),
@@ -121,6 +124,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                       controller: endDate,
                       isRequired: true,
                       readOnly: true,
+                      validationLabel: 'End date',
                       onTap: () => _selectOnlyDate(endDate),
                     ),
                   ),
@@ -133,6 +137,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                 controller: pickTime,
                 isRequired: true,
                 readOnly: true,
+                validationLabel: 'Time',
                 onTap: () async {
                   final TimeOfDay? time = await showTimePicker(
                     context: context,
@@ -158,7 +163,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: _saveMedication,
+                  onPressed: _editMedication,
                   child: Text('save_medication'.tr),
                 ),
               ),
@@ -199,7 +204,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
     );
   }
 
-  void _saveMedication() async {
+  void _editMedication() async {
     if (globalKey.currentState?.validate() ?? false) {
       final medication = MedicationModel(
         name: medicationName.text.toString(),
@@ -213,12 +218,12 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
       int id = await DBHelper.createMedication(medication);
       medication.id = id; // Update id for notification controller (notification id)
       NotificationController.scheduleMedicationNotifications(medication);
-      clearFields();
+      _clearFields();
       debugPrint('Inserted successfully with ID: $id');
     }
   }
 
-  Future<void> showCustomBottomSheet({
+  Future<void> _showCustomBottomSheet({
     required List<String> items,
     required TextEditingController controller,
     required String title,
@@ -258,7 +263,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
     super.dispose();
   }
 
-  void clearFields() {
+  void _clearFields() {
     medicationName.clear();
     medicationType.clear();
     startDate.clear();

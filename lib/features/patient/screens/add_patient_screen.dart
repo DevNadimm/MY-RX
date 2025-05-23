@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:new_app/features/patient/widgets/upload_image_section.dart';
@@ -69,9 +68,10 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
           child: Column(
             children: [
               CustomTextField(
-                label: 'Patient Name',
+                label: 'patient_name'.tr,
                 isRequired: true,
                 controller: _patientNameController,
+                validationLabel: 'Patient name',
               ),
               const SizedBox(height: 16),
               Row(
@@ -79,82 +79,92 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                 children: [
                   Expanded(
                     child: CustomTextField(
-                      label: 'Contact Number',
+                      label: 'contact_number'.tr,
                       isRequired: true,
                       keyboardType: TextInputType.phone,
                       controller: _contactNumberController,
+                      validationLabel: 'Contact number',
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: CustomTextField(
-                      label: 'WhatsApp Number',
+                      label: 'whatsapp_number'.tr,
                       keyboardType: TextInputType.phone,
                       controller: _whatsappNumberController,
+                      validationLabel: 'WhatsApp number',
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Patient Address',
-                controller: _addressController,
-              ),
-              const SizedBox(height: 16),
-              CustomTextField(
-                label: 'Patient Email',
+                label: 'patient_email'.tr,
                 keyboardType: TextInputType.emailAddress,
                 controller: _emailController,
+                validationLabel: 'Email',
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Chief Complain (if any)',
-                hintText: 'Chief Complain',
+                label: 'patient_address'.tr,
+                controller: _addressController,
+                validationLabel: 'Address',
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'chief_complain'.tr,
+                hintText: 'chief_complain'.tr,
                 controller: _chiefComplainController,
+                validationLabel: 'Chief complain',
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Family Disease (if any)',
-                hintText: 'Family Disease',
+                label: 'family_disease'.tr,
+                hintText: 'family_disease'.tr,
                 controller: _familyDiseaseController,
+                validationLabel: 'Family disease',
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'OT History (if any)',
-                hintText: 'OT History',
+                label: 'ot_history'.tr,
+                hintText: 'ot_history'.tr,
                 controller: _otHistoryController,
+                validationLabel: 'OT history',
               ),
               const SizedBox(height: 16),
               CustomTextField(
-                label: 'Present Medication (if any)',
-                hintText: 'Present Medication',
+                label: 'present_medication'.tr,
+                hintText: 'present_medication'.tr,
                 controller: _presentMedicationController,
+                validationLabel: 'Present medication',
               ),
               const SizedBox(height: 16),
               Row(
                 children: [
                   Expanded(
                     child: CustomTextField(
-                      label: 'Height',
-                      hintText: "Height like 5'11\"",
+                      label: 'height'.tr,
+                      hintText: 'height_hint'.tr, // e.g., Height like 5'11"
                       controller: _heightController,
+                      validationLabel: 'Height',
                     ),
                   ),
                   const SizedBox(width: 16),
                   Expanded(
                     child: CustomTextField(
-                      label: 'Weight',
-                      hintText: 'Weight like 55',
+                      label: 'weight'.tr,
+                      hintText: 'weight_hint'.tr, // e.g., Weight like 55
                       suffixText: 'kg',
                       keyboardType: const TextInputType.numberWithOptions(decimal: true),
                       controller: _weightController,
+                      validationLabel: 'Weight',
                     ),
                   ),
                 ],
               ),
               const SizedBox(height: 16),
               UploadImageSection(
-                title: "Upload Prescription",
+                title: "upload_prescription".tr,
                 onImagesChanged: (images) {
                   setState(() {
                     prescriptionImages = images;
@@ -163,7 +173,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
               ),
               const SizedBox(height: 16),
               UploadImageSection(
-                title: "Upload Reports",
+                title: "upload_reports".tr,
                 onImagesChanged: (images) {
                   setState(() {
                     reportImages = images;
@@ -176,7 +186,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                 height: 50,
                 child: ElevatedButton(
                   onPressed: _submit,
-                  child: const Text("Save Patient"),
+                  child: Text("save_patient".tr),
                 ),
               ),
             ],

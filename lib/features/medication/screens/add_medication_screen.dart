@@ -63,6 +63,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 controller: medicationName,
                 isRequired: true,
                 hintText: 'type_here'.tr,
+                validationLabel: 'Medication name',
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -71,6 +72,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 controller: medicationType,
                 isRequired: true,
                 readOnly: true,
+                validationLabel: 'Medication type',
                 onTap: () {
                   showCustomBottomSheet(
                     items: ConstantList.drugList,
@@ -90,6 +92,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                       controller: startDate,
                       isRequired: true,
                       readOnly: true,
+                      validationLabel: 'Start date',
                       onTap: () => _selectOnlyDate(startDate),
                     ),
                   ),
@@ -101,6 +104,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                       controller: endDate,
                       isRequired: true,
                       readOnly: true,
+                      validationLabel: 'End date',
                       onTap: () => _selectOnlyDate(endDate),
                     ),
                   ),
@@ -113,6 +117,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
                 controller: pickTime,
                 isRequired: true,
                 readOnly: true,
+                validationLabel: 'Time',
                 onTap: () async {
                   final TimeOfDay? time = await showTimePicker(
                     context: context,

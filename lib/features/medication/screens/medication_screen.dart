@@ -26,14 +26,14 @@ class MedicationScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'Manage your medications efficiently',
+              'feature_medication_description'.tr,
               style: Theme.of(context).textTheme.titleMedium,
             ),
             const SizedBox(height: 30),
             _buildOptionCard(
               context,
-              title: 'Add New Medication',
-              subtitle: 'Set up a new medication for the patient',
+              title: 'add_new_medication'.tr,
+              subtitle: 'add_new_medication_subtitle'.tr,
               icon: Icons.medication_outlined,
               onTap: () {
                 Get.to(() => const AddMedicationScreen());
@@ -42,8 +42,8 @@ class MedicationScreen extends StatelessWidget {
             const SizedBox(height: 20),
             _buildOptionCard(
               context,
-              title: 'View Active Medications',
-              subtitle: 'Check or update current prescriptions',
+              title: 'view_active_medications'.tr,
+              subtitle: 'view_active_medications_subtitle'.tr,
               icon: Icons.local_pharmacy_outlined,
               onTap: () {
                 Get.to(() => const ViewMedicationScreen());

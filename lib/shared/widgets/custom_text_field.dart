@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.keyboardType = TextInputType.text,
     this.readOnly = false,
     this.onTap,
+    required this.validationLabel,
   });
 
   final String label;
@@ -21,6 +22,7 @@ class CustomTextField extends StatelessWidget {
   final TextInputType keyboardType;
   final bool readOnly;
   final VoidCallback? onTap;
+  final String validationLabel;
 
   @override
   Widget build(BuildContext context) {
@@ -59,11 +61,11 @@ class CustomTextField extends StatelessWidget {
           ),
           validator: isRequired
               ? (value) {
-                  if (value == null || value.trim().isEmpty) {
-                    return '${label[0].toUpperCase()}${label.substring(1).toLowerCase()} is required';
-                  }
-                  return null;
-                }
+            if (value == null || value.trim().isEmpty) {
+              return '${validationLabel[0].toUpperCase()}${validationLabel.substring(1).toLowerCase()} is required';
+            }
+            return null;
+          }
               : null,
         ),
       ],
