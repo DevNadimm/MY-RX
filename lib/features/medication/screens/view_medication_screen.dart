@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:new_app/core/utils/toast_message.dart';
 import 'package:new_app/features/medication/controllers/notification_controller.dart';
@@ -32,7 +33,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('View Active Medication'),
+        title: Text('view_active_medications'.tr),
         leading: const AppBarLeadingArrow(),
         actions: [
           medicationList.isNotEmpty
