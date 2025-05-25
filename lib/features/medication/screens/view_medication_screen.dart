@@ -70,6 +70,9 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
                     onDelete: () {
                       deleteMedication(medication);
                     },
+                    onEditComplete: () async {
+                      await onEditComplete();
+                    },
                   );
                 },
               ),
@@ -159,5 +162,11 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
         },
       ),
     );
+  }
+
+  Future<void> onEditComplete() async {
+    medicationList = await DBHelper.readMedication();
+    setState(() {});
+    Get.back();
   }
 }

@@ -3,6 +3,7 @@ import 'package:get/get_utils/src/extensions/export.dart';
 import 'package:intl/intl.dart';
 import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/utils/constant_list.dart';
+import 'package:new_app/core/utils/toast_message.dart';
 import 'package:new_app/features/medication/controllers/notification_controller.dart';
 import 'package:new_app/features/medication/database/db_helper.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
@@ -26,7 +27,7 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
   final TextEditingController endDate = TextEditingController();
   final TextEditingController pickTime = TextEditingController();
 
-  String intakeTiming = 'Before Eat';
+  String intakeTiming = 'Before Meals';
 
   Future<void> _selectOnlyDate(TextEditingController controller) async {
     final DateTime? picked = await showDatePicker(
@@ -133,9 +134,9 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
               const SizedBox(height: 8),
               Row(
                 children: [
-                  _buildIntakeToggle('Before Eat'),
+                  _buildIntakeToggle('Before Meals'),
                   const SizedBox(width: 16),
-                  _buildIntakeToggle('After Eat'),
+                  _buildIntakeToggle('After Meals'),
                 ],
               ),
               const SizedBox(height: 24),
@@ -186,20 +187,24 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
 
   void _saveMedication() async {
     if (globalKey.currentState?.validate() ?? false) {
-      final medication = MedicationModel(
-        name: medicationName.text.toString(),
-        type: medicationType.text.toString(),
-        startDate: startDate.text.toString(),
-        endDate: endDate.text.toString(),
-        time: pickTime.text.toString(),
-        whenToTake: intakeTiming,
-      );
+      try {
+        final medication = MedicationModel(
+          name: medicationName.text.toString(),
+          type: medicationType.text.toString(),
+          startDate: startDate.text.toString(),
+          endDate: endDate.text.toString(),
+          time: pickTime.text.toString(),
+          whenToTake: intakeTiming,
+        );
 
-      int id = await DBHelper.createMedication(medication);
-      medication.id = id; // Update id for notification controller (notification id)
-      NotificationController.scheduleMedicationNotifications(medication);
-      clearFields();
-      debugPrint('Inserted successfully with ID: $id');
+        int id = await DBHelper.createMedication(medication);
+        medication.id = id; // Update id for notification controller (notification id)
+        NotificationController.scheduleMedicationNotifications(medication);
+        clearFields();
+        ToastMessage.success("Medication added successfully!");
+      } catch (e) {
+        ToastMessage.error("Failed to add medication. Please try again.");
+      }
     }
   }
 
