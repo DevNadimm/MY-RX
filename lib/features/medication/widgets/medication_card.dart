@@ -8,8 +8,9 @@ import 'package:new_app/features/medication/screens/edit_medication_screen.dart'
 class MedicationCard extends StatelessWidget {
   final MedicationModel medication;
   final VoidCallback onDelete;
+  final VoidCallback onEditComplete;
 
-  const MedicationCard({super.key, required this.medication, required this.onDelete});
+  const MedicationCard({super.key, required this.medication, required this.onDelete, required this.onEditComplete});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +95,12 @@ class MedicationCard extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         onPressed: () {
-                          Get.to(() => EditMedicationScreen(medication: medication,));
+                          Get.to(
+                            () => EditMedicationScreen(
+                              medication: medication,
+                              onEditComplete: onEditComplete,
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: AppColors.primaryColor.withOpacity(0.2),

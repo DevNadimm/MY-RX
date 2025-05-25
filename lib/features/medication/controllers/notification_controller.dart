@@ -5,7 +5,7 @@ import 'package:new_app/features/medication/models/medication_model.dart';
 import '../services/notification_service.dart';
 
 class NotificationController {
-  static void scheduleMedicationNotifications(MedicationModel medication) {
+  static Future<void> scheduleMedicationNotifications(MedicationModel medication) async {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
 
     final DateTime startDate = dateFormat.parse(medication.startDate);
@@ -30,7 +30,7 @@ class NotificationController {
         String title = HelperFunctions.getRandomNotificationTitle();
         String body = HelperFunctions.getRandomNotificationBody(medication);
 
-        NotificationService().scheduleNotification(
+        await NotificationService().scheduleNotification(
           id: uniqueNotificationId,
           title: title,
           body: body,
@@ -44,7 +44,7 @@ class NotificationController {
     }
   }
 
-  static void cancelMedicationNotifications(MedicationModel medication) {
+  static Future<void> cancelMedicationNotifications(MedicationModel medication) async {
     final DateFormat dateFormat = DateFormat('yyyy-MM-dd');
     final DateTime startDate = dateFormat.parse(medication.startDate);
     final DateTime endDate = dateFormat.parse(medication.endDate);
@@ -55,7 +55,7 @@ class NotificationController {
 
     while (!currentDate.isAfter(endDate)) {
       final int notificationId = baseId * 1000 + dayIndex;
-      NotificationService().cancelNotification(notificationId);
+      await NotificationService().cancelNotification(notificationId);
       currentDate = currentDate.add(const Duration(days: 1));
       dayIndex++;
     }
