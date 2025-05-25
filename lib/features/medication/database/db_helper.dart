@@ -53,7 +53,7 @@ class DBHelper {
       where: 'id = ?',
       whereArgs: [medication.id],
     );
-    debugPrint('✏️ Updated medication with id: ${medication.id}, affected rows: $count');
+    debugPrint('🛠️ Updated medication with id: ${medication.id}, affected rows: $count');
     return count;
   }
 
