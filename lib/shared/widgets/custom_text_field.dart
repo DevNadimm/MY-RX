@@ -12,6 +12,7 @@ class CustomTextField extends StatelessWidget {
     this.readOnly = false,
     this.onTap,
     required this.validationLabel,
+    this.onChanged,
   });
 
   final String label;
@@ -23,6 +24,7 @@ class CustomTextField extends StatelessWidget {
   final bool readOnly;
   final VoidCallback? onTap;
   final String validationLabel;
+  final ValueChanged<String>? onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -59,13 +61,14 @@ class CustomTextField extends StatelessWidget {
             suffixText: suffixText,
             border: const OutlineInputBorder(),
           ),
+          onChanged: onChanged,
           validator: isRequired
               ? (value) {
-            if (value == null || value.trim().isEmpty) {
-              return '${validationLabel[0].toUpperCase()}${validationLabel.substring(1).toLowerCase()} is required';
-            }
-            return null;
-          }
+                  if (value == null || value.trim().isEmpty) {
+                    return '${validationLabel[0].toUpperCase()}${validationLabel.substring(1).toLowerCase()} is required';
+                  }
+                  return null;
+                }
               : null,
         ),
       ],
