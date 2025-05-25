@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_utils/src/extensions/export.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/utils/constant_list.dart';
+import 'package:new_app/core/utils/toast_message.dart';
 import 'package:new_app/features/medication/controllers/notification_controller.dart';
 import 'package:new_app/features/medication/database/db_helper.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
@@ -12,9 +13,9 @@ import 'package:new_app/shared/widgets/custom_bottom_sheet.dart';
 import 'package:new_app/shared/widgets/custom_text_field.dart';
 
 class EditMedicationScreen extends StatefulWidget {
-  const EditMedicationScreen({super.key, required this.medication});
-
+  const EditMedicationScreen({super.key, required this.medication, required this.onEditComplete});
   final MedicationModel medication;
+  final VoidCallback onEditComplete;
 
   @override
   State<EditMedicationScreen> createState() => _EditMedicationScreenState();
@@ -28,27 +29,25 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
   final TextEditingController endDate = TextEditingController();
   final TextEditingController pickTime = TextEditingController();
 
-  String intakeTiming = 'Before Eat';
+  String intakeTiming = 'Before Meals';
 
   @override
   void initState() {
-    storePreviousData();
     super.initState();
+    storePreviousData();
   }
 
-  void storePreviousData () {
-    setState(() {
-      medicationName.text = widget.medication.name;
-      medicationType.text = widget.medication.type;
-      startDate.text = widget.medication.startDate;
-      endDate.text = widget.medication.endDate;
-      pickTime.text = widget.medication.time;
-      intakeTiming = widget.medication.whenToTake;
-    });
+  void storePreviousData() {
+    medicationName.text = widget.medication.name;
+    medicationType.text = widget.medication.type;
+    startDate.text = widget.medication.startDate;
+    endDate.text = widget.medication.endDate;
+    pickTime.text = widget.medication.time;
+    intakeTiming = widget.medication.whenToTake;
   }
 
   Future<void> _selectOnlyDate(TextEditingController controller) async {
-    final date = DateTime.parse(controller.text);
+    final date = DateTime.tryParse(controller.text) ?? DateTime.now();
     final DateTime? picked = await showDatePicker(
       context: context,
       initialDate: date,
@@ -57,6 +56,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
     );
     if (picked != null) {
       controller.text = DateFormat('yyyy-MM-dd').format(picked);
+      setState(() {});
     }
   }
 
@@ -84,6 +84,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                 isRequired: true,
                 hintText: 'type_here'.tr,
                 validationLabel: 'Medication name',
+                onChanged: (_) => setState(() {}),
               ),
               const SizedBox(height: 16),
               CustomTextField(
@@ -100,6 +101,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                     title: 'select_medication'.tr,
                   );
                 },
+                onChanged: (_) => setState(() {}),
               ),
               const SizedBox(height: 16),
               Row(
@@ -114,6 +116,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                       readOnly: true,
                       validationLabel: 'Start date',
                       onTap: () => _selectOnlyDate(startDate),
+                      onChanged: (_) => setState(() {}),
                     ),
                   ),
                   const SizedBox(width: 16),
@@ -126,6 +129,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                       readOnly: true,
                       validationLabel: 'End date',
                       onTap: () => _selectOnlyDate(endDate),
+                      onChanged: (_) => setState(() {}),
                     ),
                   ),
                 ],
@@ -145,17 +149,19 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                   );
                   if (time != null) {
                     pickTime.text = time.format(context);
+                    setState(() {});
                   }
                 },
+                onChanged: (_) => setState(() {}),
               ),
               const SizedBox(height: 16),
               Text('when_to_take'.tr, style: Theme.of(context).textTheme.titleMedium),
               const SizedBox(height: 8),
               Row(
                 children: [
-                  _buildIntakeToggle('Before Eat'),
+                  _buildIntakeToggle('Before Meals'),
                   const SizedBox(width: 16),
-                  _buildIntakeToggle('After Eat'),
+                  _buildIntakeToggle('After Meals'),
                 ],
               ),
               const SizedBox(height: 24),
@@ -163,7 +169,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
                 width: double.infinity,
                 height: 50,
                 child: ElevatedButton(
-                  onPressed: _editMedication,
+                  onPressed: hasMedicationChanged() ? _editMedication : null,
                   child: Text('save_medication'.tr),
                 ),
               ),
@@ -186,8 +192,7 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
         child: Container(
           padding: const EdgeInsets.symmetric(vertical: 12),
           decoration: BoxDecoration(
-            color:
-            isSelected ? AppColors.primaryColor : AppColors.primaryColor.withOpacity(0.1),
+            color: isSelected ? AppColors.primaryColor : AppColors.primaryColor.withOpacity(0.1),
             borderRadius: BorderRadius.circular(10),
           ),
           child: Center(
@@ -206,20 +211,36 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
 
   void _editMedication() async {
     if (globalKey.currentState?.validate() ?? false) {
-      final medication = MedicationModel(
-        name: medicationName.text.toString(),
-        type: medicationType.text.toString(),
-        startDate: startDate.text.toString(),
-        endDate: endDate.text.toString(),
-        time: pickTime.text.toString(),
-        whenToTake: intakeTiming,
-      );
+      try {
+        final oldMedication = widget.medication; // Store the original
+        final oldId = oldMedication.id;
 
-      int id = await DBHelper.createMedication(medication);
-      medication.id = id; // Update id for notification controller (notification id)
-      NotificationController.scheduleMedicationNotifications(medication);
-      _clearFields();
-      debugPrint('Inserted successfully with ID: $id');
+        final updatedMedication = MedicationModel(
+          id: oldId,
+          name: medicationName.text,
+          type: medicationType.text,
+          startDate: startDate.text,
+          endDate: endDate.text,
+          time: pickTime.text,
+          whenToTake: intakeTiming,
+        );
+
+        // Cancel using the old medication info
+        await NotificationController.cancelMedicationNotifications(oldMedication);
+        await Future.delayed(const Duration(seconds: 1));
+
+        // Update the medication in the database
+        await DBHelper.updateMedication(updatedMedication);
+
+        // Schedule new notifications using the updated data
+        await NotificationController.scheduleMedicationNotifications(updatedMedication);
+
+        _clearFields();
+        ToastMessage.success("Medication updated successfully!");
+        widget.onEditComplete();
+      } catch (e) {
+        ToastMessage.error("Failed to update medication. Please try again.");
+      }
     }
   }
 
@@ -228,14 +249,14 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
     required TextEditingController controller,
     required String title,
   }) async {
-    return showModalBottomSheet(
+    await showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
       ),
       builder: (context) {
         return StatefulBuilder(
-          builder: (context, setState) {
+          builder: (context, bottomSheetSetState) {
             return CustomBottomSheetContent(
               items: items,
               controller: controller,
@@ -253,14 +274,13 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
     );
   }
 
-  @override
-  void dispose() {
-    medicationName.dispose();
-    medicationType.dispose();
-    startDate.dispose();
-    endDate.dispose();
-    pickTime.dispose();
-    super.dispose();
+  bool hasMedicationChanged() {
+    return widget.medication.name != medicationName.text ||
+        widget.medication.type != medicationType.text ||
+        widget.medication.startDate != startDate.text ||
+        widget.medication.endDate != endDate.text ||
+        widget.medication.time != pickTime.text ||
+        widget.medication.whenToTake != intakeTiming;
   }
 
   void _clearFields() {
@@ -269,5 +289,15 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
     startDate.clear();
     endDate.clear();
     pickTime.clear();
+  }
+
+  @override
+  void dispose() {
+    medicationName.dispose();
+    medicationType.dispose();
+    startDate.dispose();
+    endDate.dispose();
+    pickTime.dispose();
+    super.dispose();
   }
 }
