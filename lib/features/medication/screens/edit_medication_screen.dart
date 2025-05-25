@@ -236,10 +236,10 @@ class _EditMedicationScreenState extends State<EditMedicationScreen> {
         await NotificationController.scheduleMedicationNotifications(updatedMedication);
 
         _clearFields();
-        ToastMessage.success("Medication updated successfully!");
+        ToastMessage.medUpdateSuccess();
         widget.onEditComplete();
       } catch (e) {
-        ToastMessage.error("Failed to update medication. Please try again.");
+        ToastMessage.medUpdateFailed();
       }
     }
   }

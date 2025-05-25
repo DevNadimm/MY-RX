@@ -125,10 +125,10 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
 
             medicationList.clear();
             setState(() {});
-            ToastMessage.success("All medications have been deleted successfully.");
+            ToastMessage.medDeleteAllSuccess();
           } catch (e) {
             debugPrint("Error Occurred when deleting all medications: $e");
-            ToastMessage.error("Failed to delete all medications. Please try again.");
+            ToastMessage.medDeleteAllFailed();
           }
         },
       ),
@@ -154,10 +154,10 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
             setState(() {
               medicationList.removeWhere((e) => e.id == medication.id);
             });
-            ToastMessage.success("The medication has been deleted successfully.");
+            ToastMessage.medDeleteSuccess();
           } catch (e) {
             debugPrint("Error Occurred when deleting medication: $e");
-            ToastMessage.error("Failed to delete the medication. Please try again.");
+            ToastMessage.medDeleteFailed();
           }
         },
       ),

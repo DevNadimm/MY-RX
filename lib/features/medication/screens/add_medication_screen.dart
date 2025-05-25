@@ -201,9 +201,9 @@ class _AddMedicationScreenState extends State<AddMedicationScreen> {
         medication.id = id; // Update id for notification controller (notification id)
         NotificationController.scheduleMedicationNotifications(medication);
         clearFields();
-        ToastMessage.success("Medication added successfully!");
+        ToastMessage.medAddSuccess();
       } catch (e) {
-        ToastMessage.error("Failed to add medication. Please try again.");
+        ToastMessage.medAddFailed();
       }
     }
   }
