@@ -95,13 +95,22 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
     final currentDate = DateTime.now();
     final today = DateTime(currentDate.year, currentDate.month, currentDate.day);
 
+    // Collect IDs to delete
+    List<int> idsToDelete = [];
+
     for (var med in medicationList) {
       final end = DateTime.parse(med.endDate);
       final medEndDate = DateTime(end.year, end.month, end.day);
 
       if (today.isAfter(medEndDate)) {
-        medicationList.removeWhere((e) => e.id == med.id);
-        await DBHelper.deleteMedication(med.id!);
+        idsToDelete.add(med.id!);
+      }
+
+      // Remove from local list and database
+      medicationList.removeWhere((e) => idsToDelete.contains(e.id));
+
+      for (var id in idsToDelete) {
+        await DBHelper.deleteMedication(id);
       }
     }
   }
