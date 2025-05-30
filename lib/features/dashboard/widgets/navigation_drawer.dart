@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:hugeicons/hugeicons.dart';
 import 'package:new_app/core/services/localization_service.dart';
+import 'package:new_app/features/medication/services/notification_service.dart';
 
 class CustomNavigationDrawer extends StatefulWidget {
   const CustomNavigationDrawer({super.key});
@@ -30,8 +31,8 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
             accountName: const Text('Nadim Chowdhury'),
             accountEmail: const Text('nadimchowdhury87@gmail.com'),
             currentAccountPicture: const CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider('https://shorturl.at/Gg04h')
-            ),
+                backgroundImage:
+                    CachedNetworkImageProvider('https://shorturl.at/Gg04h')),
             decoration: BoxDecoration(
               color: Theme.of(context).primaryColor,
             ),
@@ -41,8 +42,26 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
             title: const Text('Language (Bengali)'),
             trailing: Switch(
               value: isBengali,
-              onChanged: _toggleLanguage,
+              onChanged: (val) {
+                _toggleLanguage(val);
+                NotificationService().sendNotification(
+                  "🌍 You're all set!",
+                  val
+                      ? "The app is now in Bengali 🇧🇩 — শুভ দিন!"
+                      : "The app is now in English 🇬🇧 — Have a great day!",
+                );
+              },
             ),
+            onTap: () {
+              final newLang = !isBengali;
+              _toggleLanguage(newLang);
+              NotificationService().sendNotification(
+                "🌍 You're all set!",
+                newLang
+                    ? "The app is now in Bengali 🇧🇩 — শুভ দিন!"
+                    : "The app is now in English 🇬🇧 — Have a great day!",
+              );
+            },
           ),
           ListTile(
             leading: const Icon(HugeIcons.strokeRoundedUserGroup),
