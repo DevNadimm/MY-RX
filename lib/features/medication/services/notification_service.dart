@@ -78,7 +78,7 @@ class NotificationService {
             'Medication Reminders',
             channelDescription: 'Channel for medication reminders',
             importance: Importance.max,
-            priority: Priority.high,
+            priority: Priority.max,
           ),
         ),
         androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
