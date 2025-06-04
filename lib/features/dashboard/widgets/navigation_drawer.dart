@@ -85,24 +85,22 @@ class _CustomNavigationDrawerState extends State<CustomNavigationDrawer> {
             },
           ),
           const Spacer(),
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: ElevatedButton.icon(
-                onPressed: () async {},
-                icon: const Icon(
-                  HugeIcons.strokeRoundedLogout03,
-                  color: Colors.white,
-                ),
-                label: const Text("Logout"),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red.shade400,
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10),
+          SafeArea(
+            child: SizedBox(
+              width: double.infinity,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: ElevatedButton.icon(
+                  onPressed: () async {},
+                  icon: const Icon(
+                    HugeIcons.strokeRoundedLogout03,
+                    color: Colors.white,
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 12),
+                  label: const Text("Logout"),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    foregroundColor: Colors.white,
+                  ),
                 ),
               ),
             ),

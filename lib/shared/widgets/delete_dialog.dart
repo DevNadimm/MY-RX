@@ -50,7 +50,7 @@ class DeleteDialog extends StatelessWidget {
                 Expanded(
                   child: ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(),
-                    style: OutlinedButton.styleFrom(backgroundColor: Colors.white),
+                    style: ElevatedButton.styleFrom(backgroundColor: Colors.white),
                     child: Text(
                       'Cancel',
                       style: Theme.of(context).textTheme.titleMedium,
