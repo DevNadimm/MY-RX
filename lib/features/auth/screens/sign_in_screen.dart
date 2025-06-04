@@ -103,9 +103,9 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      if (_globalKey.currentState?.validate() ?? false) {
+                      //if (_globalKey.currentState?.validate() ?? false) {
                         Get.offAll(() => const HomeDashboardScreen());
-                      }
+                      //}
                     },
                     child: const Text("Sign In"),
                   ),
