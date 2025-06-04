@@ -119,8 +119,8 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
     showDialog(
       context: context,
       builder: (context) => DeleteDialog(
-        title: 'Delete All Medications',
-        subTitle: 'Are you sure you want to delete all medications? This action cannot be undone.',
+        title: 'Delete all medications?',
+        subTitle: 'This action cannot be undone.\nAre you sure you want to permanently remove all medications from your list?',
         deleteBtnText: 'Delete All',
         onDelete: () async {
           try {
@@ -144,7 +144,7 @@ class _ViewMedicationScreenState extends State<ViewMedicationScreen> {
     );
   }
 
-  deleteMedication(MedicationModel medication) {
+  void deleteMedication(MedicationModel medication) {
     showDialog(
       context: context,
       builder: (_) => DeleteDialog(
