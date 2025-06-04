@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:new_app/features/auth/widgets/auth_footer.dart';
 import 'package:new_app/features/dashboard/screens/home_dashboard_screen.dart';
+import 'package:new_app/shared/widgets/custom_text_field.dart';
 
 class SignInScreen extends StatefulWidget {
   const SignInScreen({super.key});
@@ -30,31 +32,31 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(height: 100),
                 Text(
                   "Welcome back!",
-                  style: Theme.of(context).textTheme.displayMedium,
+                  style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 8),
                 Text(
                   "It's great to have you back with us again!",
-                  style: Theme.of(context).textTheme.titleLarge,
+                  style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 32),
-                TextFormField(
+                CustomTextField(
                   controller: _emailController,
+                  label: "Email",
+                  hintText: "Enter your email",
+                  validationLabel: "Email",
+                  isRequired: true,
                   keyboardType: TextInputType.emailAddress,
-                  decoration: InputDecoration(
-                    hintText: "Enter your email",
-                    labelText: "Email",
-                    prefixIcon: Icon(
-                      Icons.email_outlined,
-                      color: Colors.grey.shade600,
-                    ),
+                  prefixIcon: Icon(
+                    HugeIcons.strokeRoundedMail01,
+                    color: Colors.grey.shade600,
                   ),
                   validator: (email) {
                     if (email == null || email.isEmpty) {
-                      return 'Please enter your email';
+                      return 'Email is required';
                     }
                     final emailRegex =
-                    RegExp(r'^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
+                        RegExp(r'^[a-zA-Z0-9]+@[a-zA-Z0-9]+\.[a-zA-Z]+');
                     if (!emailRegex.hasMatch(email)) {
                       return 'Please enter a valid email';
                     }
@@ -62,30 +64,32 @@ class _SignInScreenState extends State<SignInScreen> {
                   },
                 ),
                 const SizedBox(height: 24),
-                TextFormField(
+                CustomTextField(
                   controller: _passwordController,
-                  decoration: InputDecoration(
-                    hintText: "Enter your password",
-                    labelText: "Password",
-                    prefixIcon: Icon(
-                      Icons.lock_outline_rounded,
-                      color: Colors.grey.shade600,
-                    ),
-                    suffixIcon: IconButton(
-                      onPressed: () {
-                        setState(() {
-                          isPasswordVisible = !isPasswordVisible;
-                        });
-                      },
-                      icon: isPasswordVisible
-                          ? Icon(Icons.visibility_off, color: Colors.grey.shade600)
-                          : Icon(Icons.visibility, color: Colors.grey.shade600),
-                    ),
-                  ),
+                  label: "Password",
+                  hintText: "Enter your password",
+                  validationLabel: "Password",
+                  isRequired: true,
+                  keyboardType: TextInputType.text,
                   obscureText: isPasswordVisible ? false : true,
+                  prefixIcon: Icon(
+                    HugeIcons.strokeRoundedLockPassword,
+                    color: Colors.grey.shade600,
+                  ),
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isPasswordVisible = !isPasswordVisible;
+                      });
+                    },
+                    icon: isPasswordVisible
+                        ? Icon(Icons.visibility_off,
+                            color: Colors.grey.shade600)
+                        : Icon(Icons.visibility, color: Colors.grey.shade600),
+                  ),
                   validator: (password) {
                     if (password == null || password.isEmpty) {
-                      return 'Please enter your password';
+                      return 'Password is required';
                     }
                     if (password.length < 6) {
                       return 'Password must be at least 6 characters';
@@ -99,50 +103,18 @@ class _SignInScreenState extends State<SignInScreen> {
                   width: double.infinity,
                   child: ElevatedButton(
                     onPressed: () {
-                      Get.to(() => const HomeDashboardScreen());
-                      // if (_globalKey.currentState?.validate() ?? false) {
-                      //   // onTapSignIn(
-                      //   //   _emailController.text.trim(),
-                      //   //   _passwordController.text.trim(),
-                      //   // );
-                      // }
+                      if (_globalKey.currentState?.validate() ?? false) {
+                        Get.offAll(() => const HomeDashboardScreen());
+                      }
                     },
                     child: const Text("Sign In"),
                   ),
                 ),
-                // const SizedBox(height: 32),
-                // const AuthDivider(
-                //   label: 'or sign in with',
-                // ),
-                // const SizedBox(height: 32),
-                // Row(
-                //   children: [
-                //     Expanded(
-                //       child: SocialButton(
-                //         onTap: () {},
-                //         imgPath: 'assets/logos/google.png',
-                //         label: 'Google',
-                //         context: context,
-                //       ),
-                //     ),
-                //     const SizedBox(width: 16),
-                //     Expanded(
-                //       child: SocialButton(
-                //         onTap: () {},
-                //         imgPath: 'assets/logos/facebook.png',
-                //         label: 'Facebook',
-                //         context: context,
-                //       ),
-                //     )
-                //   ],
-                // ),
                 const SizedBox(height: 24),
                 AuthFooter(
-                  label: "Don't have an account? ",
+                  label: "Don't have an account?  ",
                   actionText: "Sign Up",
-                  onTap: () {
-                    //Get.to(const SignUpScreen());
-                  },
+                  onTap: () {},
                 ),
               ],
             ),
@@ -151,20 +123,6 @@ class _SignInScreenState extends State<SignInScreen> {
       ),
     );
   }
-
-  // void onTapSignIn(String email, String password) async {
-  //   final controller = SignInController.instance;
-  //   final isSignIn = await controller.signIn(email: email, password: password);
-  //   if (isSignIn) {
-  //     controller.isJoinedBatch
-  //         ? Get.offAll(const HomeScreen())
-  //         : Get.offAll(const JoinBatchScreen());
-  //   } else {
-  //     SnackBarMessage.errorMessage(
-  //       controller.errorMessage ?? "Something went wrong!",
-  //     );
-  //   }
-  // }
 
   @override
   void dispose() {
