@@ -69,6 +69,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
             children: [
               CustomTextField(
                 label: 'patient_name'.tr,
+                hintText: 'patient_name_hint'.tr,
                 isRequired: true,
                 controller: _patientNameController,
                 validationLabel: 'Patient name',
@@ -80,6 +81,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   Expanded(
                     child: CustomTextField(
                       label: 'contact_number'.tr,
+                      hintText: 'number_hint'.tr,
                       isRequired: true,
                       keyboardType: TextInputType.phone,
                       controller: _contactNumberController,
@@ -90,6 +92,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                   Expanded(
                     child: CustomTextField(
                       label: 'whatsapp_number'.tr,
+                      hintText: 'number_hint'.tr,
                       keyboardType: TextInputType.phone,
                       controller: _whatsappNumberController,
                       validationLabel: 'WhatsApp number',
@@ -100,6 +103,7 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
               const SizedBox(height: 16),
               CustomTextField(
                 label: 'patient_email'.tr,
+                hintText: 'patient_email_hint'.tr,
                 keyboardType: TextInputType.emailAddress,
                 controller: _emailController,
                 validationLabel: 'Email',
@@ -107,34 +111,35 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
               const SizedBox(height: 16),
               CustomTextField(
                 label: 'patient_address'.tr,
+                hintText: 'patient_address_hint'.tr,
                 controller: _addressController,
                 validationLabel: 'Address',
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 label: 'chief_complain'.tr,
-                hintText: 'chief_complain'.tr,
+                hintText: 'chief_complain_hint'.tr,
                 controller: _chiefComplainController,
                 validationLabel: 'Chief complain',
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 label: 'family_disease'.tr,
-                hintText: 'family_disease'.tr,
+                hintText: 'family_disease_hint'.tr,
                 controller: _familyDiseaseController,
                 validationLabel: 'Family disease',
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 label: 'ot_history'.tr,
-                hintText: 'ot_history'.tr,
+                hintText: 'ot_history_hint'.tr,
                 controller: _otHistoryController,
                 validationLabel: 'OT history',
               ),
               const SizedBox(height: 16),
               CustomTextField(
                 label: 'present_medication'.tr,
-                hintText: 'present_medication'.tr,
+                hintText: 'present_medication_hint'.tr,
                 controller: _presentMedicationController,
                 validationLabel: 'Present medication',
               ),
@@ -181,12 +186,14 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                 },
               ),
               const SizedBox(height: 24),
-              SizedBox(
-                width: double.infinity,
-                height: 50,
-                child: ElevatedButton(
-                  onPressed: _submit,
-                  child: Text("save_patient".tr),
+              SafeArea(
+                child: SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: _submit,
+                    child: Text("save_patient".tr),
+                  ),
                 ),
               ),
             ],

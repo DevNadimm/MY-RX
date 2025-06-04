@@ -6,8 +6,8 @@ ElevatedButtonThemeData elevatedButtonTheme = ElevatedButtonThemeData(
     backgroundColor: AppColors.primaryColor,
     foregroundColor: AppColors.backgroundColor,
     textStyle: const TextStyle(
-      fontWeight: FontWeight.w600,
-      color: AppColors.primaryTextColor,
+      fontWeight: FontWeight.bold,
+      color: Colors.white,
     ),
   ),
 );
