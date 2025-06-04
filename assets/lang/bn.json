@@ -1,4 +1,15 @@
 {
+  "// Auth Section": "",
+  "welcome_back": "আবার স্বাগতম!",
+  "welcome_back_subtitle": "আমাদের সঙ্গে আবার ফিরে আসায় খুব ভাল লাগছে!",
+  "email_label": "ইমেইল",
+  "email_hint": "আপনার ইমেইল লিখুন",
+  "password_label": "পাসওয়ার্ড",
+  "password_hint": "আপনার পাসওয়ার্ড লিখুন",
+  "sign_in": "সাইন ইন",
+  "dont_have_account": "অ্যাকাউন্ট নেই?  ",
+  "sign_up": "সাইন আপ",
+
   "// General / Home Section": "",
   "hello": "হ্যালো",
   "features": "ফিচারসমূহ",

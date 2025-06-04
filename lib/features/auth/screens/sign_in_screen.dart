@@ -31,19 +31,19 @@ class _SignInScreenState extends State<SignInScreen> {
               children: [
                 const SizedBox(height: 100),
                 Text(
-                  "Welcome back!",
+                  'welcome_back'.tr,
                   style: Theme.of(context).textTheme.headlineLarge,
                 ),
                 const SizedBox(height: 8),
                 Text(
-                  "It's great to have you back with us again!",
+                  'welcome_back_subtitle'.tr,
                   style: Theme.of(context).textTheme.titleMedium,
                 ),
                 const SizedBox(height: 32),
                 CustomTextField(
                   controller: _emailController,
-                  label: "Email",
-                  hintText: "Enter your email",
+                  label: 'email_label'.tr,
+                  hintText: 'email_hint'.tr,
                   validationLabel: "Email",
                   isRequired: true,
                   keyboardType: TextInputType.emailAddress,
@@ -66,8 +66,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 const SizedBox(height: 24),
                 CustomTextField(
                   controller: _passwordController,
-                  label: "Password",
-                  hintText: "Enter your password",
+                  label: 'password_label'.tr,
+                  hintText: 'password_hint'.tr,
                   validationLabel: "Password",
                   isRequired: true,
                   keyboardType: TextInputType.text,
@@ -107,13 +107,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         Get.offAll(() => const HomeDashboardScreen());
                       //}
                     },
-                    child: const Text("Sign In"),
+                    child: Text('sign_in'.tr),
                   ),
                 ),
                 const SizedBox(height: 24),
                 AuthFooter(
-                  label: "Don't have an account?  ",
-                  actionText: "Sign Up",
+                  label: 'dont_have_account'.tr,
+                  actionText: 'sign_up'.tr,
                   onTap: () {},
                 ),
               ],
