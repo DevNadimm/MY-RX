@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:new_app/core/themes/colors.dart';
 import 'package:new_app/core/utils/helper_functions.dart';
 import 'package:new_app/features/medication/models/medication_model.dart';
@@ -65,7 +66,7 @@ class MedicationCard extends StatelessWidget {
                 Row(
                   children: [
                     const Icon(
-                      Icons.calendar_today,
+                      HugeIcons.strokeRoundedCalendar03,
                       size: 18,
                       color: Colors.grey,
                     ),
@@ -82,7 +83,7 @@ class MedicationCard extends StatelessWidget {
                 const SizedBox(height: 10),
                 Row(
                   children: [
-                    const Icon(Icons.access_time, size: 18, color: Colors.grey),
+                    const Icon(HugeIcons.strokeRoundedTime03, size: 18, color: Colors.grey),
                     const SizedBox(width: 8),
                     Expanded(child: Text('At: ${medication.time}')),
                     const SizedBox(width: 8),
