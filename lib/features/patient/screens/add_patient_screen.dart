@@ -27,8 +27,12 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
   final _presentMedicationController = TextEditingController();
   final _heightController = TextEditingController();
   final _weightController = TextEditingController();
+  final _bloodGroupController = TextEditingController();
+  final _commonDiagnosisController = TextEditingController();
+  final _vaccineRecordController = TextEditingController();
   List<File> prescriptionImages = [];
-  List<File> reportImages = [];
+  List<File> generalReportImages = [];
+  List<File> radiologyReportImages = [];
 
   @override
   void dispose() {
@@ -43,6 +47,9 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
     _presentMedicationController.dispose();
     _heightController.dispose();
     _weightController.dispose();
+    _bloodGroupController.dispose();
+    _commonDiagnosisController.dispose();
+    _vaccineRecordController.dispose();
     super.dispose();
   }
 
@@ -168,6 +175,27 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
                 ],
               ),
               const SizedBox(height: 16),
+              CustomTextField(
+                label: 'blood_group'.tr,
+                hintText: 'blood_group_hint'.tr,
+                controller: _bloodGroupController,
+                validationLabel: 'Blood group',
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'common_diagnosis'.tr,
+                hintText: 'common_diagnosis_hint'.tr,
+                controller: _commonDiagnosisController,
+                validationLabel: 'Common diagnosis',
+              ),
+              const SizedBox(height: 16),
+              CustomTextField(
+                label: 'vaccine_record'.tr,
+                hintText: 'vaccine_record_hint'.tr,
+                controller: _vaccineRecordController,
+                validationLabel: 'Vaccine record',
+              ),
+              const SizedBox(height: 16),
               UploadImageSection(
                 title: "upload_prescription".tr,
                 onImagesChanged: (images) {
@@ -178,10 +206,19 @@ class _AddPatientScreenState extends State<AddPatientScreen> {
               ),
               const SizedBox(height: 16),
               UploadImageSection(
-                title: "upload_reports".tr,
+                title: 'upload_general_reports'.tr,
                 onImagesChanged: (images) {
                   setState(() {
-                    reportImages = images;
+                    generalReportImages = images;
+                  });
+                },
+              ),
+              const SizedBox(height: 16),
+              UploadImageSection(
+                title: 'upload_radiology_reports'.tr,
+                onImagesChanged: (images) {
+                  setState(() {
+                    radiologyReportImages = images;
                   });
                 },
               ),

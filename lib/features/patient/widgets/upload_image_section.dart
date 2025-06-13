@@ -28,13 +28,52 @@ class _UploadImageSectionState extends State<UploadImageSection> {
   final List<File> _selectedImages = [];
 
   Future<void> _pickImage() async {
-    final pickedFiles = await ImagePicker().pickMultiImage();
-    if (pickedFiles.isNotEmpty) {
-      setState(() {
-        _selectedImages.addAll(pickedFiles.map((file) => File(file.path)));
-      });
-      widget.onImagesChanged(_selectedImages);
-    }
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(16)),
+      ),
+      builder: (_) {
+        return Padding(
+          padding: const EdgeInsets.all(8),
+          child: SafeArea(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                ListTile(
+                  leading: const Icon(Icons.camera_alt),
+                  title: const Text('Take Photo'),
+                  onTap: () async {
+                    Navigator.pop(context);
+                    final pickedFile = await ImagePicker().pickImage(source: ImageSource.camera);
+                    if (pickedFile != null) {
+                      setState(() {
+                        _selectedImages.add(File(pickedFile.path));
+                      });
+                      widget.onImagesChanged(_selectedImages);
+                    }
+                  },
+                ),
+                ListTile(
+                  leading: const Icon(Icons.photo_library),
+                  title: const Text('Choose from Gallery'),
+                  onTap: () async {
+                    Navigator.pop(context);
+                    final pickedFiles = await ImagePicker().pickMultiImage();
+                    if (pickedFiles.isNotEmpty) {
+                      setState(() {
+                        _selectedImages.addAll(pickedFiles.map((file) => File(file.path)));
+                      });
+                      widget.onImagesChanged(_selectedImages);
+                    }
+                  },
+                ),
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 
   void _removeImage(int index) {
