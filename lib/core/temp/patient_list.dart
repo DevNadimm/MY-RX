@@ -13,6 +13,9 @@ final List<Patient> patients = [
     presentMedication: "Paracetamol",
     height: "5'8\"",
     weight: "70kg",
+    bloodGroup: "A+",
+    commonDiagnosis: "Dental cavity",
+    vaccineRecord: "Tetanus, Hepatitis B",
   ),
   Patient(
     name: "Sarah Ahmed",
@@ -26,6 +29,9 @@ final List<Patient> patients = [
     presentMedication: "Ibuprofen",
     height: "5'5\"",
     weight: "60kg",
+    bloodGroup: "B+",
+    commonDiagnosis: "Migraine",
+    vaccineRecord: "COVID-19, Influenza",
   ),
   Patient(
     name: "Rafiq Islam",
@@ -39,6 +45,9 @@ final List<Patient> patients = [
     presentMedication: "Diclofenac",
     height: "5'10\"",
     weight: "75kg",
+    bloodGroup: "O+",
+    commonDiagnosis: "Lumbar disc issue",
+    vaccineRecord: "Tetanus, Typhoid",
   ),
   Patient(
     name: "Meena Kumari",
@@ -52,6 +61,9 @@ final List<Patient> patients = [
     presentMedication: "Aspirin",
     height: "5'4\"",
     weight: "65kg",
+    bloodGroup: "AB+",
+    commonDiagnosis: "Angina",
+    vaccineRecord: "Hepatitis B, COVID-19",
   ),
   Patient(
     name: "Tanvir Hossain",
@@ -65,5 +77,8 @@ final List<Patient> patients = [
     presentMedication: "Antibiotics",
     height: "5'9\"",
     weight: "72kg",
+    bloodGroup: "A-",
+    commonDiagnosis: "Viral fever",
+    vaccineRecord: "BCG, COVID-19",
   ),
 ];

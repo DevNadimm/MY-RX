@@ -8,8 +8,11 @@ class Patient {
   final String familyDisease;
   final String otHistory;
   final String presentMedication;
+  final String vaccineRecord;
+  final String commonDiagnosis;
   final String height;
   final String weight;
+  final String bloodGroup;
 
   Patient({
     required this.name,
@@ -23,5 +26,8 @@ class Patient {
     required this.presentMedication,
     required this.height,
     required this.weight,
+    required this.vaccineRecord,
+    required this.commonDiagnosis,
+    required this.bloodGroup,
   });
 }
